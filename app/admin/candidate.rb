@@ -17,8 +17,8 @@ ActiveAdmin.register Candidate do
     end
 
     f.has_many :interviews, heading: 'Interview Stages', allow_destroy: true do |fi|
-      fi.input :stage, as: :select, collection: Interview.stages.map{ |k,v| [k.to_s.titleize, k] }
       fi.input :interview_date, as: :datepicker
+      fi.input :stage, as: :select, collection: Interview.stages.map{ |k,v| [k.to_s.titleize, k] }
       fi.input :status, as: :select, collection: Interview.statuses.map{ |k,v| [k.to_s.titleize, k] }
       fi.input :employee
     end
