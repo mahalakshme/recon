@@ -4,7 +4,7 @@ ActiveAdmin.register_page "Most_Least" do
 
   content title: "Most/Least Interviewers" do
 
-    num_days  = params[:days].present?  ? params[:days].to_i  : 30
+    num_days  = params[:days].present?  ? params[:days].to_i  : 90
     num_limit = params[:limit].present? ? params[:limit].to_i : 10
 
     query = Employee.
@@ -36,7 +36,7 @@ ActiveAdmin.register_page "Most_Least" do
               column :name
               column :grade_name
               column :interview_count
-            end
+            end if records.length > 0
           end
         end
       end
@@ -52,7 +52,7 @@ ActiveAdmin.register_page "Most_Least" do
               column :name
               column :grade_name
               column :interview_count
-            end
+            end if records.length > 0
           end
         end
       end
