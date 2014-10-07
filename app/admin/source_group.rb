@@ -1,4 +1,4 @@
-ActiveAdmin.register SubSource do
+ActiveAdmin.register SourceGroup do
 
 
   # See permitted parameters documentation:

@@ -50,13 +50,16 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.string   "name"
     t.string   "skill"
     t.integer  "gender"
-    t.integer  "sub_source_id"
+    t.integer  "experience"
+    t.integer  "source_id"
+    t.integer  "role_id"
     t.date     "last_interview_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "candidates", ["sub_source_id"], name: "index_candidates_on_sub_source_id"
+  add_index "candidates", ["role_id"], name: "index_candidates_on_role_id"
+  add_index "candidates", ["source_id"], name: "index_candidates_on_source_id"
 
   create_table "employees", force: true do |t|
     t.string   "name"
@@ -95,19 +98,19 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
+  create_table "source_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sources", force: true do |t|
     t.string   "name"
+    t.integer  "source_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "sub_sources", force: true do |t|
-    t.string   "name"
-    t.integer  "source_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sub_sources", ["source_id"], name: "index_sub_sources_on_source_id"
+  add_index "sources", ["source_group_id"], name: "index_sources_on_source_group_id"
 
 end

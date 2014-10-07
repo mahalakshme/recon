@@ -21,42 +21,42 @@ Role.create! name: 'QA'
 Role.create! name: 'UI'
 Role.create! name: 'UX'
 
-Source.create! name: 'Employee Referral' do |s|
-  SubSource.create! name: 'Employee Referral', source: s
+SourceGroup.create! name: 'Employee Referral' do |s|
+  Source.create! name: 'Employee Referral', source_group: s
 end
 
-Source.create! name: 'Mindshare' do |s|
-  SubSource.create! name: 'Mindshare', source: s
+SourceGroup.create! name: 'Mindshare' do |s|
+  Source.create! name: 'Mindshare', source_group: s
 end
 
-Source.create! name: 'Agency' do |s|
-  SubSource.create! name: 'EPP', source: s
-  SubSource.create! name: 'HNB', source: s
-  SubSource.create! name: 'Other', source: s
+SourceGroup.create! name: 'Agency' do |s|
+  Source.create! name: 'EPP', source_group: s
+  Source.create! name: 'HNB', source_group: s
+  Source.create! name: 'Other', source_group: s
 end
 
-Source.create! name: 'Naukri' do |s|
-  SubSource.create! name: 'Naukri', source: s
+SourceGroup.create! name: 'Naukri' do |s|
+  Source.create! name: 'Naukri', source_group: s
 end
 
-Source.create! name: 'Monster' do |s|
-  SubSource.create! name: 'Monster', source: s
+SourceGroup.create! name: 'Monster' do |s|
+  Source.create! name: 'Monster', source_group: s
 end
 
-Source.create! name: 'LinkedIn' do |s|
-  SubSource.create! name: 'In Mail', source: s
-  SubSource.create! name: 'Job Posting', source: s
-  SubSource.create! name: 'Recruiter Network', source: s
-  SubSource.create! name: 'Other', source: s
+SourceGroup.create! name: 'LinkedIn' do |s|
+  Source.create! name: 'In Mail', source_group: s
+  Source.create! name: 'Job Posting', source_group: s
+  Source.create! name: 'Recruiter Network', source_group: s
+  Source.create! name: 'Other', source_group: s
 end
 
-Source.create! name: 'Marketing Campaign' do |s|
-  SubSource.create! name: 'Hacker Earth', source: s
-  SubSource.create! name: 'Other', source: s
+SourceGroup.create! name: 'Marketing Campaign' do |s|
+  Source.create! name: 'Hacker Earth', source_group: s
+  Source.create! name: 'Other', source_group: s
 end
 
-Source.create! name: 'Events' do |s|
-  SubSource.create! name: 'Rails Girls', source: s
-  SubSource.create! name: 'Geek Night', source: s
-  SubSource.create! name: 'VodQA', source: s
+SourceGroup.create! name: 'Events' do |s|
+  Source.create! name: 'Rails Girls', source_group: s
+  Source.create! name: 'Geek Night', source_group: s
+  Source.create! name: 'VodQA', source_group: s
 end

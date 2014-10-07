@@ -4,7 +4,9 @@ class CreateCandidates < ActiveRecord::Migration
       t.string :name
       t.string :skill
       t.integer :gender
-      t.references :sub_source, index: true
+      t.integer :experience
+      t.references :source, index: true
+      t.references :role, index: true
       t.date :last_interview_date, index: true
 
       t.timestamps
