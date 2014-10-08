@@ -47,12 +47,18 @@ class Interview < ActiveRecord::Base
   validates :employee_id, presence: true
 
   after_save :update_last_interview_date
+  after_save :invalidate_leaderboard
+  after_destroy :invalidate_leaderboard
 
   def update_last_interview_date
     candidate.update_column :last_interview_date, interview_date if (
       candidate.last_interview_date.nil? ||
       interview_date > candidate.last_interview_date
     )
+  end
+
+  def invalidate_leaderboard
+    Rails.cache.delete_matched /leaderboard/
   end
 
   def employee_name

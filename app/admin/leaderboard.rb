@@ -31,7 +31,10 @@ ActiveAdmin.register_page "Leaderboard" do
         most_query = query.order('interview_count DESC')
         Role.all.each do |role|
           panel role.name do
-            records = most_query.where(role_id: role.id)
+            records = Rails.cache.fetch("leaderboard/most/#{role.id}", expires_in: 1.hour) do
+              most_query.where(role_id: role.id).to_a
+            end
+
             table_for records do
               column :name
               column :grade_name
@@ -47,7 +50,10 @@ ActiveAdmin.register_page "Leaderboard" do
         least_query = query.order('interview_count ASC')
         Role.all.each do |role|
           panel role.name do
-            records = least_query.where(role_id: role.id)
+            records = Rails.cache.fetch("leaderboard/least/#{role.id}", expires_in: 1.hour) do
+              least_query.where(role_id: role.id).to_a
+            end
+
             table_for records do
               column :name
               column :grade_name
