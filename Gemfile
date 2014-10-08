@@ -8,7 +8,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',        group: :doc
 gem 'spring',      group: :development
 gem 'activeadmin', github: 'activeadmin'
-gem 'active_skin', '~> 0.0.2'
+gem 'jquery-ui-rails', '~> 5.0.0'
+gem 'rails3-jquery-autocomplete', '~> 1.0.14'
+gem 'active_skin', '~> 0.0.8'
 gem 'devise', '~> 3.3.0'
 gem 'squeel', '~> 1.2.1'
 

@@ -6,4 +6,10 @@ ActiveAdmin.register Employee do
   filter :grade
   filter :role
 
+  collection_action :autocomplete_employee_name, method: :get
+
+  controller do
+    autocomplete :employee, :name, full: true
+  end
+
 end

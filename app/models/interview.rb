@@ -54,4 +54,8 @@ class Interview < ActiveRecord::Base
       interview_date > candidate.last_interview_date
     )
   end
+
+  def employee_name
+    employee.try :name
+  end
 end
