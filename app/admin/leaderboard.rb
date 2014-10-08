@@ -1,8 +1,8 @@
-ActiveAdmin.register_page "Most_Least" do
+ActiveAdmin.register_page "Leaderboard" do
 
-  menu priority: 1, label: "Most/Least"
+  menu priority: 1, label: "Leaderboard"
 
-  content title: "Most/Least Interviewers" do
+  content title: "Leaderboard" do
 
     num_days  = params[:days].present?  ? params[:days].to_i  : 90
     num_limit = params[:limit].present? ? params[:limit].to_i : 10
