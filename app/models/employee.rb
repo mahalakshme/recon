@@ -19,6 +19,4 @@
 class Employee < ActiveRecord::Base
   belongs_to :grade
   belongs_to :role
-
-  has_many :interviews
 end

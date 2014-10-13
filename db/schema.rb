@@ -83,14 +83,18 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.integer  "stage"
     t.date     "interview_date"
     t.integer  "candidate_id"
-    t.integer  "employee_id"
+    t.integer  "employee_1_id"
+    t.integer  "employee_2_id"
+    t.integer  "employee_3_id"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "interviews", ["candidate_id"], name: "index_interviews_on_candidate_id"
-  add_index "interviews", ["employee_id"], name: "index_interviews_on_employee_id"
+  add_index "interviews", ["employee_1_id"], name: "index_interviews_on_employee_1_id"
+  add_index "interviews", ["employee_2_id"], name: "index_interviews_on_employee_2_id"
+  add_index "interviews", ["employee_3_id"], name: "index_interviews_on_employee_3_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"

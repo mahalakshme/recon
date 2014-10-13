@@ -13,7 +13,9 @@ ActiveAdmin.register_page "Leaderboard" do
         Interview.
           where { interview_date >= num_days.days.ago }.
           as('employee_interviews').
-          on { id == employee_interviews.employee_id }.
+          on { (id == employee_interviews.employee_1_id) |
+               (id == employee_interviews.employee_2_id) |
+               (id == employee_interviews.employee_3_id) }.
           outer
       ] }.
       group{ employees.id }.

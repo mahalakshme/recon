@@ -4,7 +4,9 @@ class CreateInterviews < ActiveRecord::Migration
       t.integer :stage
       t.date :interview_date
       t.references :candidate, index: true
-      t.references :employee, index: true
+      t.references :employee_1, index: true
+      t.references :employee_2, index: true
+      t.references :employee_3, index: true
       t.integer :status
 
       t.timestamps

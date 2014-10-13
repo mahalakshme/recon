@@ -3,7 +3,7 @@ ActiveAdmin.register Candidate do
   enumize = proc { |k,v| [k.to_s.titleize, k] }
 
   permit_params :id, :name, :skill, :gender, :experience, :source_id, :role_id, :last_interview_date,
-    interviews_attributes: [ :id, :stage, :interview_date, :candidate_id, :employee_id, :status, :_destroy ]
+    interviews_attributes: [ :id, :stage, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :_destroy ]
 
   filter :name
   filter :skill
@@ -45,7 +45,9 @@ ActiveAdmin.register Candidate do
       fi.input :interview_date, as: :datepicker
       fi.input :stage, as: :select, collection: Interview.stages.map(&enumize)
       fi.input :status, as: :select, collection: Interview.statuses.map(&enumize)
-      fi.input :employee
+      fi.input :employee_1
+      fi.input :employee_2
+      fi.input :employee_3
     end
 
     f.actions
@@ -68,8 +70,10 @@ ActiveAdmin.register Candidate do
       table_for c.interviews.order(:interview_date) do
         column :interview_date
         column :stage do |i| i.stage.to_s.titleize end
-        column :employee
         column :status do |i| i.status.to_s.titleize end
+        column :employee_1
+        column :employee_2
+        column :employee_3
       end
     end
   end

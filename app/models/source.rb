@@ -15,4 +15,7 @@
 
 class Source < ActiveRecord::Base
   belongs_to :source_group
+
+  validates :source_group, presence: true
+  validates :name, presence: true
 end

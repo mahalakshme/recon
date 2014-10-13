@@ -6,20 +6,26 @@
 #  stage          :integer
 #  interview_date :date
 #  candidate_id   :integer
-#  employee_id    :integer
+#  employee_1_id  :integer
+#  employee_2_id  :integer
+#  employee_3_id  :integer
 #  status         :integer
 #  created_at     :datetime
 #  updated_at     :datetime
 #
 # Indexes
 #
-#  index_interviews_on_candidate_id  (candidate_id)
-#  index_interviews_on_employee_id   (employee_id)
+#  index_interviews_on_candidate_id   (candidate_id)
+#  index_interviews_on_employee_1_id  (employee_1_id)
+#  index_interviews_on_employee_2_id  (employee_2_id)
+#  index_interviews_on_employee_3_id  (employee_3_id)
 #
 
 class Interview < ActiveRecord::Base
   belongs_to :candidate
-  belongs_to :employee
+  belongs_to :employee_1, class_name: 'Employee'
+  belongs_to :employee_2, class_name: 'Employee'
+  belongs_to :employee_3, class_name: 'Employee'
 
   enum stage: {
     telephone: 0,
@@ -44,7 +50,7 @@ class Interview < ActiveRecord::Base
   validates :stage, presence: true
   validates :status, presence: true
   validates :interview_date, presence: true
-  validates :employee_id, presence: true
+  validates :employee_1, presence: true
 
   after_save :update_last_interview_date
   after_save :invalidate_leaderboard
@@ -58,10 +64,7 @@ class Interview < ActiveRecord::Base
   end
 
   def invalidate_leaderboard
-    Rails.cache.delete_matched /leaderboard/
+    Rails.cache.delete_matched /^leaderboard/
   end
 
-  def employee_name
-    employee.try :name
-  end
 end
