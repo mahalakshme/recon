@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Leaderboard" do
                (id == employee_interviews.employee_3_id) }.
           outer
       ] }.
-      group{ employees.id }.
+      group{ [ employees.id, grade.name ] }.
       select{ [
         employees.name,
         grade.name.as(grade_name),

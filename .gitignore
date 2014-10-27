@@ -147,3 +147,6 @@ Session.vim
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+### Vagrant ###
+.vagrant/

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140903152809) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
     t.text     "body"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "candidates", force: true do |t|
     t.string   "name"
@@ -58,8 +61,8 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
-  add_index "candidates", ["role_id"], name: "index_candidates_on_role_id"
-  add_index "candidates", ["source_id"], name: "index_candidates_on_source_id"
+  add_index "candidates", ["role_id"], name: "index_candidates_on_role_id", using: :btree
+  add_index "candidates", ["source_id"], name: "index_candidates_on_source_id", using: :btree
 
   create_table "employees", force: true do |t|
     t.string   "name"
@@ -70,8 +73,8 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
-  add_index "employees", ["grade_id"], name: "index_employees_on_grade_id"
-  add_index "employees", ["role_id"], name: "index_employees_on_role_id"
+  add_index "employees", ["grade_id"], name: "index_employees_on_grade_id", using: :btree
+  add_index "employees", ["role_id"], name: "index_employees_on_role_id", using: :btree
 
   create_table "grades", force: true do |t|
     t.string   "name"
@@ -91,10 +94,10 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
-  add_index "interviews", ["candidate_id"], name: "index_interviews_on_candidate_id"
-  add_index "interviews", ["employee_1_id"], name: "index_interviews_on_employee_1_id"
-  add_index "interviews", ["employee_2_id"], name: "index_interviews_on_employee_2_id"
-  add_index "interviews", ["employee_3_id"], name: "index_interviews_on_employee_3_id"
+  add_index "interviews", ["candidate_id"], name: "index_interviews_on_candidate_id", using: :btree
+  add_index "interviews", ["employee_1_id"], name: "index_interviews_on_employee_1_id", using: :btree
+  add_index "interviews", ["employee_2_id"], name: "index_interviews_on_employee_2_id", using: :btree
+  add_index "interviews", ["employee_3_id"], name: "index_interviews_on_employee_3_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -115,6 +118,6 @@ ActiveRecord::Schema.define(version: 20140903152809) do
     t.datetime "updated_at"
   end
 
-  add_index "sources", ["source_group_id"], name: "index_sources_on_source_group_id"
+  add_index "sources", ["source_group_id"], name: "index_sources_on_source_group_id", using: :btree
 
 end
