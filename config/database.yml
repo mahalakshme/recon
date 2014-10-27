@@ -10,7 +10,6 @@ default: &default
   pool: 5
   host: localhost
   username: postgres
-  password: postgres
 
 development:
   <<: *default
@@ -25,4 +24,5 @@ test:
 
 production:
   <<: *default
+  host: postgres
   database: recon_prod

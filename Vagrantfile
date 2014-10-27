@@ -26,8 +26,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     apt-get -y update
     apt-get -y install build-essential git libxml2-dev libxslt1-dev imagemagick zlib1g-dev ruby2.1 ruby2.1-dev nodejs curl wget postgresql postgresql-contrib postgresql-client libpq-dev
 
-    echo "Setting up postgres password..."
-    su postgres -c "psql -c \\"alter user postgres with password 'postgres';\\""
+    echo "Setting up postgres authentication..."
+    echo 'host all all 0.0.0.0/0 trust' > /etc/postgresql/9.3/main/pg_hba.conf
+    service postgresql restart
 
     echo "Setting up ruby..."
     echo 'gem: --no-ri --no-rdoc' > /etc/gemrc
