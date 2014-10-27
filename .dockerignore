@@ -1,0 +1,14 @@
+*~
+.git*
+*.DS_Store
+
+public/assets/*
+tmp/*
+log/*
+
+features/*
+spec/*
+
+.idea/*
+.vagrant/*
+.bundle/*

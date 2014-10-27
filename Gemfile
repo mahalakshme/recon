@@ -18,3 +18,7 @@ group :development, :test do
   gem 'annotate', '~> 2.6.5'
   gem 'quiet_assets', '~> 1.0.3'
 end
+
+group :production do
+  gem 'unicorn', '~> 4.8.3'
+end

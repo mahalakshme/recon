@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+echo 'path-exclude /usr/share/doc/*'            > /etc/dpkg/dpkg.cfg.d/01_nodoc
+echo 'path-include /usr/share/doc/*/copyright' >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+echo 'path-exclude /usr/share/man/*'           >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+echo 'path-exclude /usr/share/groff/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+echo 'path-exclude /usr/share/info/*'          >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+echo 'path-exclude /usr/share/locale/*'        >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+echo 'path-include /usr/share/locale/en*'      >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+
+apt-get -y --force-yes update
+apt-get -y --force-yes --no-install-recommends install ca-certificates
+
+echo 'deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main' > /etc/apt/sources.list.d/passenger.list
+echo 'deb-src http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main' >> /etc/apt/sources.list.d/passenger.list
+
+apt-get -y --force-yes update
+apt-get -y --force-yes --no-install-recommends install build-essential git libxml2-dev libxslt1-dev ruby2.1 ruby2.1-dev nodejs libpq-dev
+echo 'gem: --no-ri --no-rdoc' > /etc/gemrc
+gem install bundler
+
+# Cleanup
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
