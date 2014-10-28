@@ -1,5 +1,9 @@
 ActiveAdmin.register_page "Leaderboard" do
 
+  controller do
+    skip_before_filter :authenticate_active_admin_user
+  end
+
   menu priority: 1, label: "Leaderboard"
 
   content title: "Leaderboard" do
