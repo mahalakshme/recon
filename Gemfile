@@ -17,6 +17,7 @@ gem 'pg', '~> 0.17.1'
 group :development, :test do
   gem 'annotate', '~> 2.6.5'
   gem 'quiet_assets', '~> 1.0.3'
+  gem 'pry-rails'
 end
 
 group :production do

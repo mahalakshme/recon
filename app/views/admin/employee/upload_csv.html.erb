@@ -1,0 +1,21 @@
+<%= form_for :dump, url: { action: :import_csv }, html: { class: 'formtastic', multipart: true } do |f| %>
+
+  <fieldset class="inputs">
+    <legend><span>Upload CSV from Jigsaw</span></legend>
+    <ol>
+      <li class="string file required">
+        <label class="label" for="upload_csv">Choose File</label>
+        <%= f.file_field :file %>
+      </li>
+    </ol>
+  </fieldset>
+
+  <fieldset class="actions">
+    <ol>
+      <li>
+        <%= f.submit "Upload" %>
+      </li>
+    </ol>
+  </fieldset>
+
+<% end %>

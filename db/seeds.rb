@@ -9,19 +9,6 @@
 if AdminUser.count == 0
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
-  Grade.create! name: 'Grad'
-  Grade.create! name: 'Consultant'
-  Grade.create! name: 'Senior Consultant'
-  Grade.create! name: 'Lead Consultant'
-  Grade.create! name: 'Principal Consultant'
-
-  Role.create! name: 'Dev'
-  Role.create! name: 'PM'
-  Role.create! name: 'BA'
-  Role.create! name: 'QA'
-  Role.create! name: 'UI'
-  Role.create! name: 'UX'
-
   SourceGroup.create! name: 'Employee Referral' do |s|
     Source.create! name: 'Employee Referral', source_group: s
   end

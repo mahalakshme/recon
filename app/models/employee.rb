@@ -12,11 +12,17 @@
 #
 # Indexes
 #
-#  index_employees_on_grade_id  (grade_id)
-#  index_employees_on_role_id   (role_id)
+#  index_employees_on_employee_id  (employee_id)
+#  index_employees_on_grade_id     (grade_id)
+#  index_employees_on_role_id      (role_id)
 #
 
 class Employee < ActiveRecord::Base
   belongs_to :grade
   belongs_to :role
+
+  validates :employee_id, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :grade, presence: true
+  validates :role, presence: true
 end
