@@ -23,6 +23,6 @@ class Employee < ActiveRecord::Base
 
   validates :employee_id, presence: true, uniqueness: true
   validates :name, presence: true
-  validates :grade, presence: true
-  validates :role, presence: true
+  validates :grade_id, presence: true
+  validates :role_id, presence: true
 end
