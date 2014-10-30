@@ -2,13 +2,14 @@
 .git*
 *.DS_Store
 
+.idea/*
+.vagrant/*
+.bundle/*
+
 public/assets/*
 tmp/*
 log/*
 
+*.psd
 features/*
 spec/*
-
-.idea/*
-.vagrant/*
-.bundle/*
