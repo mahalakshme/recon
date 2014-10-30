@@ -16,7 +16,7 @@ Reconnaisance for Recruitment.
     docker run --name recon-prod --link recon-postgres:postgres -p 80:8080 -d recon:latest
 
     # Redeploy
-    docker stop recon-prod
-    docker rm recon-prod
-    # and follow build & run again
-    # and make sure to remove the old unused image
+      # first build
+      docker stop recon-prod
+      docker rm recon-prod
+      # and then run

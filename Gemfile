@@ -22,4 +22,5 @@ end
 
 group :production do
   gem 'unicorn', '~> 4.8.3'
+  gem 'dalli'
 end
