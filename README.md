@@ -4,11 +4,19 @@ Reconnaisance for Recruitment.
 
 ## Production
 
-    # Pull and run postgres
+    # Pull and run postgres (needs to be done only once)
     mkdir /var/lib/recon-postgres
     docker pull postgres:9
     docker run --name recon-postgres -v /var/lib/recon-postgres:/var/lib/postgresql/data -d postgres:9
 
-    # Build and run recon
+    # Build Recon (this is going to take quite a bit of time)
     docker build -t recon:latest github.com/twchennai/recon
+
+    # Run Recon
     docker run --name recon-prod --link recon-postgres:postgres -p 80:8080 -d recon:latest
+
+    # Redeploy
+    docker stop recon-prod
+    docker rm recon-prod
+    # and follow build & run again
+    # and make sure to remove the old unused image
