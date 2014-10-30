@@ -45,9 +45,9 @@ ActiveAdmin.register Candidate do
       fi.input :interview_date, as: :datepicker
       fi.input :stage, as: :select, collection: Interview.stages.map(&enumize)
       fi.input :status, as: :select, collection: Interview.statuses.map(&enumize)
-      fi.input :employee_1
-      fi.input :employee_2
-      fi.input :employee_3
+      fi.input :employee_1, collection: Employee.active
+      fi.input :employee_2, collection: Employee.active
+      fi.input :employee_3, collection: Employee.active
     end
 
     f.actions

@@ -9,6 +9,7 @@
 #  role_id     :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  inactive    :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -25,4 +26,6 @@ class Employee < ActiveRecord::Base
   validates :name, presence: true
   validates :grade_id, presence: true
   validates :role_id, presence: true
+
+  scope :active, -> { where(inactive: false) }
 end

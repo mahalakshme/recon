@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029123321) do
+ActiveRecord::Schema.define(version: 20141029135051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20141029123321) do
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "inactive",    default: false, null: false
   end
 
   add_index "employees", ["employee_id"], name: "index_employees_on_employee_id", using: :btree
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 20141029123321) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "inactive",   default: false, null: false
   end
 
   create_table "interviews", force: true do |t|
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(version: 20141029123321) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "inactive",   default: false, null: false
   end
 
   create_table "source_groups", force: true do |t|

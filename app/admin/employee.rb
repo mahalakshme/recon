@@ -1,10 +1,11 @@
 ActiveAdmin.register Employee do
 
-  permit_params :name, :employee_id, :grade_id, :role_id
+  permit_params :name, :employee_id, :grade_id, :role_id, :inactive
 
   filter :name
   filter :grade
   filter :role
+  filter :inactive
 
   collection_action :autocomplete_employee_name, method: :get
 
@@ -29,6 +30,7 @@ ActiveAdmin.register Employee do
     column :name
     column :role
     column :grade
+    column :inactive
     actions
   end
 

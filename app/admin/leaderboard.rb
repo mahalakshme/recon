@@ -35,7 +35,7 @@ ActiveAdmin.register_page "Leaderboard" do
         h3 "Most Interviewers by Role (#{num_days} days)"
 
         most_query = query.order('interview_count DESC')
-        Role.all.each do |role|
+        Role.active.each do |role|
           panel role.name do
             records = Rails.cache.fetch("leaderboard/most/#{role.id}", expires_in: 1.hour) do
               most_query.where(role_id: role.id).to_a
@@ -54,7 +54,7 @@ ActiveAdmin.register_page "Leaderboard" do
         h3 "Least Interviewers by Role (#{num_days} days)"
 
         least_query = query.order('interview_count ASC')
-        Role.all.each do |role|
+        Role.active.each do |role|
           panel role.name do
             records = Rails.cache.fetch("leaderboard/least/#{role.id}", expires_in: 1.hour) do
               least_query.where(role_id: role.id).to_a
