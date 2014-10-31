@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-cd /app
-bundle exec rake assets:precompile db:create db:migrate db:seed
-
 export SECRET_KEY_BASE=$(bundle exec rake secret)
-bundle exec unicorn -c config/unicorn.rb -p 8080
+bundle exec rake assets:precompile db:create db:migrate db:seed
+bundle exec puma -C config/puma.rb

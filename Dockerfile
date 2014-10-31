@@ -14,3 +14,4 @@ RUN cd /app && \
     rm -Rf vendor/ruby/2.1.0/cache
 
 COPY . /app/
+WORKDIR /app

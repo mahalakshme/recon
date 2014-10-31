@@ -20,3 +20,8 @@ Reconnaisance for Recruitment.
       docker stop recon-prod
       docker rm recon-prod
       # and then run
+
+## Production Testing in Vagrant
+
+    export RAILS_ENV=production PORT=3000
+    docker/start
