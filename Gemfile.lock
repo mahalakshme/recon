@@ -64,6 +64,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    dalli (2.7.2)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -196,6 +197,7 @@ DEPENDENCIES
   active_skin (~> 0.0.8)
   activeadmin!
   annotate (~> 2.6.5)
+  dalli
   devise (~> 3.3.0)
   jbuilder (~> 2.0)
   jquery-ui-rails (~> 5.0.0)

@@ -12,6 +12,7 @@ ActiveAdmin.register_page "Leaderboard" do
     num_limit = params[:limit].present? ? params[:limit].to_i : 10
 
     query = Employee.
+      active.
       joins { [
         grade,
         Interview.
