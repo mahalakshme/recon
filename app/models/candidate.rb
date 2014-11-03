@@ -6,12 +6,14 @@
 #  name                :string(255)
 #  skill               :string(255)
 #  gender              :integer
-#  experience          :integer
+#  experience          :decimal(5, 2)
 #  source_id           :integer
 #  role_id             :integer
 #  last_interview_date :date
 #  created_at          :datetime
 #  updated_at          :datetime
+#  experience_years    :integer          default(0)
+#  experience_months   :integer          default(0)
 #
 # Indexes
 #
@@ -35,7 +37,14 @@ class Candidate < ActiveRecord::Base
   validates :name, presence: true
   validates :source, presence: true
   validates :role, presence: true
-  validates :experience, numericality: { greater_than_or_equal_to: 0 }
+  validates :experience_years, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99 }
+  validates :experience_months, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 11 }
   validates :interviews, presence: true
+
+  before_save :calculate_experience
+
+  def calculate_experience
+    self.experience = experience_years + (experience_months / 12.0)
+  end
 
 end

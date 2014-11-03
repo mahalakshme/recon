@@ -2,7 +2,8 @@ ActiveAdmin.register Candidate do
 
   enumize = proc { |k,v| [k.to_s.titleize, k] }
 
-  permit_params :id, :name, :skill, :gender, :experience, :source_id, :role_id, :last_interview_date,
+  permit_params :id, :name, :skill, :gender, :experience_years, :experience_months,
+    :source_id, :role_id, :last_interview_date,
     interviews_attributes: [ :id, :stage, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :_destroy ]
 
   filter :name
@@ -18,9 +19,11 @@ ActiveAdmin.register Candidate do
   filter :last_interview_date
 
   index do
-    column :last_interview_date
     column :name
-    column :experience
+    column :experience, :experience do |c|
+      "#{c.experience_years},#{c.experience_months}"
+    end
+    column :last_interview_date
     column :skill
     column :source
     column :role
@@ -32,7 +35,8 @@ ActiveAdmin.register Candidate do
 
     f.inputs "Candidate Details" do
       f.input :name
-      f.input :experience
+      f.input :experience_years
+      f.input :experience_months
       f.input :skill
       f.input :gender, as: :select, collection: Candidate.genders.map(&enumize)
       f.input :source_id, as: :select, collection: option_groups_from_collection_for_select(
@@ -56,7 +60,9 @@ ActiveAdmin.register Candidate do
   show do |c|
     attributes_table do
       row :name
-      row :experience
+      row :experience do
+        "#{c.experience_years} years #{c.experience_months} months"
+      end
       row :role
       row :skill
       row :gender do c.gender.to_s.titleize end
