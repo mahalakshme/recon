@@ -12,6 +12,7 @@
 #  status         :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  notes          :text
 #
 # Indexes
 #

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103083612) do
+ActiveRecord::Schema.define(version: 20141103182113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20141103083612) do
     t.datetime "updated_at"
     t.integer  "experience_years",                            default: 0
     t.integer  "experience_months",                           default: 0
+    t.text     "notes"
   end
 
   add_index "candidates", ["role_id"], name: "index_candidates_on_role_id", using: :btree
@@ -97,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141103083612) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "notes"
   end
 
   add_index "interviews", ["candidate_id"], name: "index_interviews_on_candidate_id", using: :btree

@@ -43,6 +43,7 @@ ActiveAdmin.register Candidate do
         SourceGroup.all, :sources, :name, :id, :name, f.object.source_id
       )
       f.input :role
+      f.input :notes, input_html: { rows: 2 }
     end
 
     f.has_many :interviews, heading: 'Interview Stages', allow_destroy: true do |fi|
@@ -52,6 +53,7 @@ ActiveAdmin.register Candidate do
       fi.input :employee_1, collection: Employee.active
       fi.input :employee_2, collection: Employee.active
       fi.input :employee_3, collection: Employee.active
+      fi.input :notes, input_html: { rows: 2 }
     end
 
     f.actions
@@ -68,6 +70,7 @@ ActiveAdmin.register Candidate do
       row :gender do c.gender.to_s.titleize end
       row :source
       row :last_interview_date
+      row :notes
       row :created_at
       row :updated_at
     end

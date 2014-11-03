@@ -14,6 +14,7 @@
 #  updated_at          :datetime
 #  experience_years    :integer          default(0)
 #  experience_months   :integer          default(0)
+#  notes               :text
 #
 # Indexes
 #
