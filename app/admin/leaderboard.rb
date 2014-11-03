@@ -10,6 +10,7 @@ ActiveAdmin.register_page "Leaderboard" do
 
     num_days  = params[:days].present?  ? params[:days].to_i  : 90
     num_limit = params[:limit].present? ? params[:limit].to_i : 10
+    cache_key = Interview.order(:updated_at).last.try(:updated_at).try(:to_i)
 
     query = Employee.
       active.
@@ -38,7 +39,7 @@ ActiveAdmin.register_page "Leaderboard" do
         most_query = query.order('interview_count DESC')
         Role.active.each do |role|
           panel role.name do
-            records = Rails.cache.fetch("leaderboard/most/#{role.id}", expires_in: 1.hour) do
+            records = Rails.cache.fetch("leaderboard/#{cache_key}/most/#{role.id}", expires_in: 1.hour) do
               most_query.where(role_id: role.id).to_a
             end
 
@@ -57,7 +58,7 @@ ActiveAdmin.register_page "Leaderboard" do
         least_query = query.order('interview_count ASC')
         Role.active.each do |role|
           panel role.name do
-            records = Rails.cache.fetch("leaderboard/least/#{role.id}", expires_in: 1.hour) do
+            records = Rails.cache.fetch("leaderboard/#{cache_key}/least/#{role.id}", expires_in: 1.hour) do
               least_query.where(role_id: role.id).to_a
             end
 
