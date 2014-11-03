@@ -4,6 +4,7 @@ $skinLogo: image-url("logo.png") no-repeat 0 0;
 @import "active_admin/base";
 @import "active_skin";
 @import "datetimepicker/jquery.datetimepicker.scss";
+@import "select2/select2";
 
 html {
   font-size: 13px;
