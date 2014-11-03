@@ -40,6 +40,7 @@ class Interview < ActiveRecord::Base
   }
 
   enum status: {
+    scheduled: 5,
     pursue: 0,
     pass: 1,
     pending: 2,
