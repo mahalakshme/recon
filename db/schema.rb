@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103182113) do
+ActiveRecord::Schema.define(version: 20141103182723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20141103182113) do
     t.integer  "experience_years",                            default: 0
     t.integer  "experience_months",                           default: 0
     t.text     "notes"
+    t.integer  "last_status"
   end
 
   add_index "candidates", ["role_id"], name: "index_candidates_on_role_id", using: :btree

@@ -15,6 +15,7 @@
 #  experience_years    :integer          default(0)
 #  experience_months   :integer          default(0)
 #  notes               :text
+#  last_status         :integer
 #
 # Indexes
 #
@@ -34,6 +35,8 @@ class Candidate < ActiveRecord::Base
     female: 1,
     unisex: 2
   }
+
+  enum last_status: Interview.statuses.clone
 
   validates :name, presence: true
   validates :source, presence: true

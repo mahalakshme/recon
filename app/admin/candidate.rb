@@ -17,6 +17,7 @@ ActiveAdmin.register Candidate do
   }
   filter :role
   filter :last_interview_date
+  filter :last_status
 
   index do
     column :name
@@ -24,6 +25,7 @@ ActiveAdmin.register Candidate do
       "#{c.experience_years},#{c.experience_months}"
     end
     column :last_interview_date
+    column :last_status do |c| c.last_status.to_s.titleize end
     column :skill
     column :source
     column :role
@@ -70,6 +72,7 @@ ActiveAdmin.register Candidate do
       row :gender do c.gender.to_s.titleize end
       row :source
       row :last_interview_date
+      row :last_status do |c| c.last_status.to_s.titleize end
       row :notes
       row :created_at
       row :updated_at

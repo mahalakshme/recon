@@ -23,6 +23,8 @@
 #
 
 class Interview < ActiveRecord::Base
+  default_scope { order(:interview_date) }
+
   belongs_to :candidate
   belongs_to :employee_1, class_name: 'Employee'
   belongs_to :employee_2, class_name: 'Employee'
@@ -54,13 +56,12 @@ class Interview < ActiveRecord::Base
   validates :interview_date, presence: true
   validates :employee_1, presence: true
 
-  after_save :update_last_interview_date
+  after_save :update_last_columns
 
-  def update_last_interview_date
-    candidate.update_column :last_interview_date, interview_date if (
-      candidate.last_interview_date.nil? ||
-      interview_date > candidate.last_interview_date
-    )
+  def update_last_columns
+    if candidate.last_interview_date.nil? || interview_date >= candidate.last_interview_date
+      candidate.update_columns last_interview_date: interview_date, last_status: status
+    end
   end
 
 end
