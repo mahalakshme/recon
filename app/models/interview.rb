@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  stage          :integer
-#  interview_date :date
+#  interview_date :datetime
 #  candidate_id   :integer
 #  employee_1_id  :integer
 #  employee_2_id  :integer
@@ -31,24 +31,24 @@ class Interview < ActiveRecord::Base
   belongs_to :employee_3, class_name: 'Employee'
 
   enum stage: {
-    telephone: 0,
-    code_review: 1,
-    code_reassigned: 2,
-    pairing: 3,
-    round_1: 4,
-    round_2: 5,
-    round_3: 6,
-    p3: 7,
-    leadership: 8
+    "Telephone"       => 0,
+    "Code Review"     => 1,
+    "Code Reassigned" => 2,
+    "Pairing"         => 3,
+    "Round 1"         => 4,
+    "Round 2"         => 5,
+    "Round 3"         => 6,
+    "P3"              => 7,
+    "Leadership"      => 8
   }
 
   enum status: {
-    scheduled: 5,
-    pursue: 0,
-    pass: 1,
-    pending: 2,
-    withdrew: 3,
-    no_show: 4
+    "Scheduled" => 5,
+    "Pursue"    => 0,
+    "Pass"      => 1,
+    "Pending"   => 2,
+    "Withdrew"  => 3,
+    "No Show"   => 4
   }
 
   validates :stage, presence: true
@@ -56,12 +56,10 @@ class Interview < ActiveRecord::Base
   validates :interview_date, presence: true
   validates :employee_1, presence: true
 
-  after_save :update_last_columns
+  after_save :update_last_interview_columns
 
-  def update_last_columns
-    if candidate.last_interview_date.nil? || interview_date >= candidate.last_interview_date
-      candidate.update_columns last_interview_date: interview_date, last_status: status
-    end
+  def update_last_interview_columns
+    candidate.update_last_interview_columns
   end
 
 end

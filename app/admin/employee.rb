@@ -7,8 +7,6 @@ ActiveAdmin.register Employee do
   filter :role
   filter :inactive
 
-  collection_action :autocomplete_employee_name, method: :get
-
   collection_action :upload_csv do
     render 'admin/employee/upload_csv'
   end
@@ -17,10 +15,6 @@ ActiveAdmin.register Employee do
     EmployeeImporter.import_file params[:dump][:file]
     flash[:notice] = 'CSV imported successfully!'
     redirect_to action: :index
-  end
-
-  controller do
-    autocomplete :employee, :name, full: true
   end
 
   index do

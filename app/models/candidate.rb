@@ -9,7 +9,7 @@
 #  experience          :decimal(5, 2)
 #  source_id           :integer
 #  role_id             :integer
-#  last_interview_date :date
+#  last_interview_date :datetime
 #  created_at          :datetime
 #  updated_at          :datetime
 #  experience_years    :integer          default(0)
@@ -31,12 +31,12 @@ class Candidate < ActiveRecord::Base
   accepts_nested_attributes_for :interviews, allow_destroy: true
 
   enum gender: {
-    male: 0,
-    female: 1,
-    unisex: 2
+    "Male"   => 0,
+    "Female" => 1,
+    "Unisex" => 2
   }
 
-  enum last_status: Interview.statuses.clone
+  enum last_status: Interview.statuses.dup
 
   validates :name, presence: true
   validates :source, presence: true
@@ -49,6 +49,11 @@ class Candidate < ActiveRecord::Base
 
   def calculate_experience
     self.experience = experience_years + (experience_months / 12.0)
+  end
+
+  def update_last_interview_columns
+    i = interviews.last
+    update_columns last_interview_date: i.interview_date, last_status: self.class.last_statuses[i.status]
   end
 
 end

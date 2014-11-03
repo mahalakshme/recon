@@ -7,8 +7,7 @@ class AddLastStatusToCandidates < ActiveRecord::Migration
         Candidate.reset_column_information
         Interview.reset_column_information
         Candidate.find_each do |c|
-          i = c.interviews.last
-          c.update_columns last_interview_date: i.interview_date, last_status: i.status
+          c.update_last_interview_columns
         end
       end
     end

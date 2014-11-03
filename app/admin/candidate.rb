@@ -1,31 +1,28 @@
 ActiveAdmin.register Candidate do
 
-  enumize = proc { |k,v| [k.to_s.titleize, k] }
-
-  permit_params :id, :name, :skill, :gender, :experience_years, :experience_months,
-    :source_id, :role_id, :last_interview_date,
+  permit_params :id, :name, :skill, :gender, :experience_years, :experience_months, :source_id, :role_id,
     interviews_attributes: [ :id, :stage, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :_destroy ]
 
   filter :name
   filter :skill
   filter :experience
-  filter :gender, as: :select, collection: Candidate.genders.map(&enumize)
+  filter :gender, as: :select, collection: Candidate.genders
   filter :source, as: :select, collection: proc {
     option_groups_from_collection_for_select(
       SourceGroup.all, :sources, :name, :id, :name
     )
   }
   filter :role
+  filter :last_status, as: :select, collection: Candidate.last_statuses
   filter :last_interview_date
-  filter :last_status
 
   index do
     column :name
     column :experience, :experience do |c|
       "#{c.experience_years},#{c.experience_months}"
     end
+    column :last_status
     column :last_interview_date
-    column :last_status do |c| c.last_status.to_s.titleize end
     column :skill
     column :source
     column :role
@@ -40,7 +37,7 @@ ActiveAdmin.register Candidate do
       f.input :experience_years
       f.input :experience_months
       f.input :skill
-      f.input :gender, as: :select, collection: Candidate.genders.map(&enumize)
+      f.input :gender, as: :select, collection: Candidate.genders.keys
       f.input :source_id, as: :select, collection: option_groups_from_collection_for_select(
         SourceGroup.all, :sources, :name, :id, :name, f.object.source_id
       )
@@ -49,9 +46,9 @@ ActiveAdmin.register Candidate do
     end
 
     f.has_many :interviews, heading: 'Interview Stages', allow_destroy: true do |fi|
-      fi.input :interview_date, as: :datepicker
-      fi.input :stage, as: :select, collection: Interview.stages.map(&enumize)
-      fi.input :status, as: :select, collection: Interview.statuses.map(&enumize)
+      fi.input :interview_date, as: :jquery_datetime_picker
+      fi.input :stage, as: :select, collection: Interview.stages.keys
+      fi.input :status, as: :select, collection: Interview.statuses.keys
       fi.input :employee_1, collection: Employee.active
       fi.input :employee_2, collection: Employee.active
       fi.input :employee_3, collection: Employee.active
@@ -69,10 +66,10 @@ ActiveAdmin.register Candidate do
       end
       row :role
       row :skill
-      row :gender do c.gender.to_s.titleize end
+      row :gender
       row :source
       row :last_interview_date
-      row :last_status do |c| c.last_status.to_s.titleize end
+      row :last_status
       row :notes
       row :created_at
       row :updated_at
@@ -81,8 +78,8 @@ ActiveAdmin.register Candidate do
     panel "Stages" do
       table_for c.interviews.order(:interview_date) do
         column :interview_date
-        column :stage do |i| i.stage.to_s.titleize end
-        column :status do |i| i.status.to_s.titleize end
+        column :stage
+        column :status
         column :employee_1
         column :employee_2
         column :employee_3
