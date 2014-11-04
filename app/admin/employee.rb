@@ -1,6 +1,6 @@
 ActiveAdmin.register Employee do
 
-  permit_params :name, :employee_id, :grade_id, :role_id, :inactive
+  permit_params :name, :employee_ref, :grade_id, :role_id, :inactive
 
   filter :name
   filter :grade
@@ -22,9 +22,7 @@ ActiveAdmin.register Employee do
   end
 
   index do
-    column 'Employee ID', :employee_id do |e|
-      link_to e.employee_id, e
-    end
+    column :employee_ref
     column :name
     column :role
     column :grade

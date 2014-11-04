@@ -31,7 +31,7 @@ module EmployeeImporter
       role  = fetch_role row
       grade = fetch_grade row
 
-      employee = Employee.find_by(employee_id: row['Employee ID']) || Employee.new(employee_id: row['Employee ID'])
+      employee = Employee.find_by(employee_ref: row['Employee ID']) || Employee.new(employee_ref: row['Employee ID'])
       employee.name = row['Name']
       employee.grade = grade
       employee.role = role
