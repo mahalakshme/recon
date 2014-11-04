@@ -6,14 +6,14 @@ ActiveAdmin.register Candidate do
   filter :name
   filter :skill
   filter :experience
-  filter :gender, as: :select, collection: Candidate.genders, multiple: true, input_html: { class: 'select2' }
+  filter :gender, as: :select, collection: Candidate.genders, multiple: true, input_html: { class: 'selectize' }
   filter :source, as: :select, collection: proc {
     option_groups_from_collection_for_select(
       SourceGroup.all, :sources, :name, :id, :name
     )
-  }, multiple: true, input_html: { class: 'select2' }
-  filter :role, as: :select, multiple: true, input_html: { class: 'select2' }
-  filter :last_status, as: :select, collection: Candidate.last_statuses, multiple: true, input_html: { class: 'select2' }
+  }, multiple: true, input_html: { class: 'selectize' }
+  filter :role, as: :select, multiple: true, input_html: { class: 'selectize' }
+  filter :last_status, as: :select, collection: Candidate.last_statuses, multiple: true, input_html: { class: 'selectize' }
   filter :last_interview_date
 
   index do
@@ -49,9 +49,9 @@ ActiveAdmin.register Candidate do
       fi.input :interview_date, as: :jquery_datetime_picker
       fi.input :stage, as: :select, collection: Interview.stages.keys
       fi.input :status, as: :select, collection: Interview.statuses.keys
-      fi.input :employee_1, collection: Employee.active, input_html: { class: 'select2' }
-      fi.input :employee_2, collection: Employee.active, input_html: { class: 'select2' }
-      fi.input :employee_3, collection: Employee.active, input_html: { class: 'select2' }
+      fi.input :employee_1, collection: Employee.active, input_html: { class: 'selectize' }
+      fi.input :employee_2, collection: Employee.active, input_html: { class: 'selectize' }
+      fi.input :employee_3, collection: Employee.active, input_html: { class: 'selectize' }
       fi.input :notes, input_html: { rows: 2 }
     end
 

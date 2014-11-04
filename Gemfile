@@ -10,7 +10,7 @@ gem 'spring',      group: :development
 gem 'activeadmin', github: 'activeadmin'
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'rails-assets-xdan--datetimepicker', '~> 2.3.9'
-gem 'rails-assets-select2', '~> 3.5.2'
+gem 'rails-assets-selectize', '~> 0.11.2'
 gem 'active_skin', '~> 0.0.8'
 gem 'devise', '~> 3.3.0'
 gem 'squeel', '~> 1.2.1'

@@ -1,10 +1,14 @@
+/*
+ *= require datetimepicker/jquery.datetimepicker
+ *= require selectize/selectize
+ *= require selectize/selectize.default
+ */
+
 $skinLogo: image-url("logo.png") no-repeat 0 0;
 
 @import "active_admin/mixins";
 @import "active_admin/base";
 @import "active_skin";
-@import "datetimepicker/jquery.datetimepicker.scss";
-@import "select2/select2";
 
 html {
   font-size: 13px;
@@ -50,4 +54,25 @@ body.active_admin {
     display: none;
   }
 
+}
+
+.selectize-control {
+  form.formtastic & {
+    display: inline-block;
+    width: 80%;
+  }
+
+  .selectize-dropdown, .selectize-input, .selectize-input input {
+    font-size: 12px;
+  }
+
+  .selectize-input {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 4px 8px;
+  }
+
+  &.single.plugin-remove_button [data-value] {
+    padding-right: 0 !important;
+  }
 }

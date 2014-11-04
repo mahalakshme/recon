@@ -17,6 +17,14 @@ ActiveAdmin.register Employee do
     redirect_to action: :index
   end
 
+  collection_action :autocomplete do
+    employees = Employee.
+      where('name ILIKE ?', "%#{params[:q]}%").
+      limit((params[:limit] || "15").to_i)
+
+    render json: employees.to_json(only: [:id, :name])
+  end
+
   action_item only: :index do
     link_to "Upload Jigsaw CSV", upload_csv_employees_path
   end
