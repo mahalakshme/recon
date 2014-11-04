@@ -17,6 +17,10 @@ ActiveAdmin.register Employee do
     redirect_to action: :index
   end
 
+  action_item only: :index do
+    link_to "Upload Jigsaw CSV", upload_csv_employees_path
+  end
+
   index do
     column 'Employee ID', :employee_id do |e|
       link_to e.employee_id, e
