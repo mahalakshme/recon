@@ -1,5 +1,7 @@
 ActiveAdmin.register Employee do
 
+  menu parent: 'Organization'
+
   permit_params :name, :employee_ref, :grade_id, :role_id, :inactive
 
   filter :name
