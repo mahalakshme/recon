@@ -13,6 +13,7 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  notes          :text
+#  stage_id       :integer
 #
 # Indexes
 #
@@ -20,6 +21,7 @@
 #  index_interviews_on_employee_1_id  (employee_1_id)
 #  index_interviews_on_employee_2_id  (employee_2_id)
 #  index_interviews_on_employee_3_id  (employee_3_id)
+#  index_interviews_on_stage_id       (stage_id)
 #
 
 class Interview < ActiveRecord::Base
