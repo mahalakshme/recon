@@ -49,9 +49,9 @@ ActiveAdmin.register Candidate do
       fi.input :interview_date, as: :jquery_datetime_picker
       fi.input :stage, as: :select, collection: Interview.stages.keys
       fi.input :status, as: :select, collection: Interview.statuses.keys
-      fi.input :employee_1, collection: Employee.active, input_html: { class: 'selectize' }
-      fi.input :employee_2, collection: Employee.active, input_html: { class: 'selectize' }
-      fi.input :employee_3, collection: Employee.active, input_html: { class: 'selectize' }
+      fi.input :employee_1, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
+      fi.input :employee_2, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
+      fi.input :employee_3, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
       fi.input :notes, input_html: { rows: 2 }
     end
 

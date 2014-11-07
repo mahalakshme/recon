@@ -18,9 +18,10 @@ ActiveAdmin.register Employee do
   end
 
   collection_action :autocomplete do
-    employees = Employee.
-      where('name ILIKE ?', "%#{params[:q]}%").
-      limit((params[:limit] || "15").to_i)
+    employees = Employee.limit((params[:limit] || "15").to_i)
+    params[:q].split(' ').each do |param|
+      employees = employees.where 'name ILIKE ?', "%#{param}%"
+    end
 
     render json: employees.to_json(only: [:id, :name])
   end

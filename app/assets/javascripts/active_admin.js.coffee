@@ -1,8 +1,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui
-#= require datetimepicker/jquery.datetimepicker
-#= require selectize/standalone/selectize
+#= require jquery.datetimepicker
+#= require selectize
 #= require active_admin/base
 #= require jquery_datetime_picker_input
 #= require selectize_input

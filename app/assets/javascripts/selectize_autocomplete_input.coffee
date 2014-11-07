@@ -1,15 +1,21 @@
 setupSelectizeAutocomplete = (container) ->
   defaults =
+    create: false
+    searchField: 'name'
     valueField: 'id'
     labelField: 'name'
     searchField: 'name'
-    create: false
     load: (query, callback) ->
-      console.log this
       return callback unless query.length
+      $.ajax
+        url: this.settings.url
+        type: 'get'
+        data: { q: query }
+        error: -> callback()
+        success: (res) -> callback(res)
 
   $(container).find('.selectize-autocomplete').each ->
-    options = $(@).data('selectize-options')
+    options = $(@).data('selectize')
     $(@).selectize $.extend(options, defaults)
 
 $ ->

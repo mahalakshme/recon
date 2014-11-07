@@ -3,7 +3,7 @@ setupSelectize = (container) ->
     plugins: ['remove_button']
 
   $(container).find('.selectize').each ->
-    options = $(@).data('selectize-options')
+    options = $(@).data('selectize')
     $(@).selectize $.extend(options, defaults)
 
 $ ->
