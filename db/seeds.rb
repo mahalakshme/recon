@@ -8,7 +8,9 @@
 
 if AdminUser.count == 0
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
 
+if Source.count == 0
   SourceGroup.create! name: 'Employee Referral' do |s|
     Source.create! name: 'Employee Referral', source_group: s
   end
@@ -48,4 +50,15 @@ if AdminUser.count == 0
     Source.create! name: 'Geek Night', source_group: s
     Source.create! name: 'VodQA', source_group: s
   end
+end
+
+if Stage.count == 0
+  Stage.create! name: 'Telephone', position: 0
+  Stage.create! name: 'Code Review', position: 1
+  Stage.create! name: 'Pairing', position: 2
+  Stage.create! name: 'Round 1', position: 3
+  Stage.create! name: 'Round 2', position: 4
+  Stage.create! name: 'Round 3', position: 5
+  Stage.create! name: 'P3', position: 6
+  Stage.create! name: 'Leadership', position: 7
 end

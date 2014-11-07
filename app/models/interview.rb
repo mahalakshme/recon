@@ -3,7 +3,6 @@
 # Table name: interviews
 #
 #  id             :integer          not null, primary key
-#  stage          :integer
 #  interview_date :datetime
 #  candidate_id   :integer
 #  employee_1_id  :integer
@@ -28,21 +27,11 @@ class Interview < ActiveRecord::Base
   default_scope { order(:interview_date) }
 
   belongs_to :candidate
+  belongs_to :stage
+
   belongs_to :employee_1, class_name: 'Employee'
   belongs_to :employee_2, class_name: 'Employee'
   belongs_to :employee_3, class_name: 'Employee'
-
-  enum stage: {
-    "Telephone"       => 0,
-    "Code Review"     => 1,
-    "Code Reassigned" => 2,
-    "Pairing"         => 3,
-    "Round 1"         => 4,
-    "Round 2"         => 5,
-    "Round 3"         => 6,
-    "P3"              => 7,
-    "Leadership"      => 8
-  }
 
   enum status: {
     "Scheduled" => 5,

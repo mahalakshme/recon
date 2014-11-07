@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107184038) do
+ActiveRecord::Schema.define(version: 20141107190832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +63,10 @@ ActiveRecord::Schema.define(version: 20141107184038) do
     t.integer  "experience_months",                           default: 0
     t.text     "notes"
     t.integer  "last_status"
+    t.integer  "last_stage_id"
   end
 
+  add_index "candidates", ["last_stage_id"], name: "index_candidates_on_last_stage_id", using: :btree
   add_index "candidates", ["role_id"], name: "index_candidates_on_role_id", using: :btree
   add_index "candidates", ["source_id"], name: "index_candidates_on_source_id", using: :btree
 
@@ -90,7 +92,6 @@ ActiveRecord::Schema.define(version: 20141107184038) do
   end
 
   create_table "interviews", force: true do |t|
-    t.integer  "stage"
     t.datetime "interview_date"
     t.integer  "candidate_id"
     t.integer  "employee_1_id"

@@ -16,16 +16,19 @@
 #  experience_months   :integer          default(0)
 #  notes               :text
 #  last_status         :integer
+#  last_stage_id       :integer
 #
 # Indexes
 #
-#  index_candidates_on_role_id    (role_id)
-#  index_candidates_on_source_id  (source_id)
+#  index_candidates_on_last_stage_id  (last_stage_id)
+#  index_candidates_on_role_id        (role_id)
+#  index_candidates_on_source_id      (source_id)
 #
 
 class Candidate < ActiveRecord::Base
   belongs_to :source
   belongs_to :role
+  belongs_to :last_stage, class_name: 'Stage'
 
   has_many :interviews, dependent: :destroy
   accepts_nested_attributes_for :interviews, allow_destroy: true
@@ -53,7 +56,11 @@ class Candidate < ActiveRecord::Base
 
   def update_last_interview_columns
     i = interviews.last
-    update_columns last_interview_date: i.interview_date, last_status: self.class.last_statuses[i.status]
+    update_columns(
+      last_interview_date: i.interview_date,
+      last_status: self.class.last_statuses[i.status],
+      last_stage_id: i.stage_id
+    )
   end
 
 end

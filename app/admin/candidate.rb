@@ -1,7 +1,7 @@
 ActiveAdmin.register Candidate do
 
   permit_params :id, :name, :skill, :gender, :experience_years, :experience_months, :source_id, :role_id,
-    interviews_attributes: [ :id, :stage, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :_destroy ]
+    interviews_attributes: [ :id, :stage_id, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :_destroy ]
 
   filter :name
   filter :skill
@@ -14,6 +14,7 @@ ActiveAdmin.register Candidate do
   }, multiple: true, input_html: { class: 'selectize' }
   filter :role, as: :select, multiple: true, input_html: { class: 'selectize' }
   filter :last_status, as: :select, collection: Candidate.last_statuses, multiple: true, input_html: { class: 'selectize' }
+  filter :last_stage, as: :select, collection: Stage.all, multiple: true, input_html: { class: 'selectize' }
   filter :last_interview_date
 
   index do
@@ -22,7 +23,10 @@ ActiveAdmin.register Candidate do
       "#{c.experience_years},#{c.experience_months}"
     end
     column :last_status
-    column :last_interview_date
+    column :last_stage
+    column :last_interview_date do |c|
+      c.last_interview_date.strftime '%a %b %-d, %I:%M %p'
+    end
     column :skill
     column :source
     column :role
@@ -47,7 +51,7 @@ ActiveAdmin.register Candidate do
 
     f.has_many :interviews, heading: 'Interview Stages', allow_destroy: true do |fi|
       fi.input :interview_date, as: :jquery_datetime_picker
-      fi.input :stage, as: :select, collection: Interview.stages.keys
+      fi.input :stage, as: :select, collection: Stage.all
       fi.input :status, as: :select, collection: Interview.statuses.keys
       fi.input :employee_1, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
       fi.input :employee_2, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }

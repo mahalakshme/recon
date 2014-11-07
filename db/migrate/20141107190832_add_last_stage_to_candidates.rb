@@ -1,6 +1,6 @@
-class AddLastStatusToCandidates < ActiveRecord::Migration
+class AddLastStageToCandidates < ActiveRecord::Migration
   def change
-    add_column :candidates, :last_status, :integer
+    add_reference :candidates, :last_stage, index: true
 
     reversible do |dir|
       dir.up do
