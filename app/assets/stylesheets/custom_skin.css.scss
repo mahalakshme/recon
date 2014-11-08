@@ -1,0 +1,50 @@
+html {
+  font-size: 13px;
+}
+
+body.active_admin {
+
+  padding-bottom: 0;
+  font-size: 100%;
+
+  fieldset.inputs.has_many_fields {
+    padding-top: 5px;
+  }
+
+  table.index_table td {
+    color: #333;
+  }
+
+  #header h1.site_title {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 150px;
+    background-size: cover;
+  }
+
+  #footer {
+    display: none;
+  }
+
+}
+
+.selectize-control {
+  form.formtastic & {
+    display: inline-block;
+    width: 80%;
+  }
+
+  .selectize-dropdown, .selectize-input, .selectize-input input {
+    font-size: 12px;
+  }
+
+  .selectize-input {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 4px 8px;
+  }
+
+  &.single.plugin-remove_button [data-value] {
+    padding-right: 0 !important;
+  }
+}

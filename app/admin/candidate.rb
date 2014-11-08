@@ -9,13 +9,19 @@ ActiveAdmin.register Candidate do
   filter :gender, as: :select, collection: Candidate.genders, multiple: true, input_html: { class: 'selectize' }
   filter :source, as: :select, collection: proc {
     option_groups_from_collection_for_select(
-      SourceGroup.all, :sources, :name, :id, :name
+      SourceGroup.includes(:sources), :sources, :name, :id, :name
     )
   }, multiple: true, input_html: { class: 'selectize' }
   filter :role, as: :select, multiple: true, input_html: { class: 'selectize' }
   filter :last_status, as: :select, collection: Candidate.last_statuses, multiple: true, input_html: { class: 'selectize' }
   filter :last_stage, as: :select, collection: Stage.all, multiple: true, input_html: { class: 'selectize' }
   filter :last_interview_date
+
+  controller do
+    def scoped_collection
+      Candidate.includes(:role, :last_stage, source: :source_group)
+    end
+  end
 
   index do
     column :name

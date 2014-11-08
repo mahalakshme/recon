@@ -1,0 +1,51 @@
+body.active_admin.pipeline {
+
+  #active_admin_content {
+    &, #main_content_wrapper {
+      &, #main_content {
+        &, .columns {
+          &, .column {
+            &, .panel {
+              padding: 0;
+              height: 100%;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #active_admin_content #main_content_wrapper #main_content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 120px;
+    width: auto;
+    overflow-x: scroll;
+
+    .columns {
+      padding: 15px 15px 0 15px;
+    }
+
+    .panel > h3 {
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .panel_contents {
+      padding: 0;
+    }
+
+    .candidate {
+      padding: 10px;
+      border-bottom: 1px dashed #ccc;
+
+      h3.name {
+        margin-bottom: .33em;
+      }
+    }
+  }
+
+}

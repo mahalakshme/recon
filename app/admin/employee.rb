@@ -9,6 +9,12 @@ ActiveAdmin.register Employee do
   filter :role
   filter :inactive
 
+  controller do
+    def scoped_collection
+      Employee.includes(:role, :grade)
+    end
+  end
+
   collection_action :upload_csv do
     render 'admin/employee/upload_csv'
   end
