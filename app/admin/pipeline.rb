@@ -6,8 +6,8 @@ ActiveAdmin.register_page 'Pipeline' do
 
     candidates = Candidate.
       order(:last_interview_date).
-      where { last_interview_date >= Date.today }.
-      where { last_interview_date <= 7.days.from_now }
+      where('last_interview_date >= ?', Date.today).
+      where('last_interview_date <= ?', 7.days.from_now)
 
     stages = Stage.all
 

@@ -7,6 +7,7 @@
 #  position   :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  points     :integer
 #
 
 class Stage < ActiveRecord::Base

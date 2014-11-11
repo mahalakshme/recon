@@ -12,41 +12,40 @@ ActiveAdmin.register_page "Leaderboard" do
     num_limit = params[:limit].present? ? params[:limit].to_i : 10
     cache_key = Interview.order(:updated_at).last.try(:updated_at).try(:to_i)
 
-    query = Employee.
-      active.
-      joins { [
-        grade,
-        Interview.
-          where { interview_date >= num_days.days.ago }.
-          as('employee_interviews').
-          on { (id == employee_interviews.employee_1_id) |
-               (id == employee_interviews.employee_2_id) |
-               (id == employee_interviews.employee_3_id) }.
-          outer
-      ] }.
-      group{ [ employees.id, grade.name ] }.
-      select{ [
-        employees.name,
-        grade.name.as(grade_name),
-        count(employee_interviews.id).as(interview_count)
-      ] }.
-      limit(num_limit)
+    sql = <<-QUERY
+      SELECT
+        e.name AS employee_name,
+        COALESCE(SUM(s.points), 0) AS points
+
+      FROM employees e
+      LEFT OUTER JOIN interviews i ON (
+        i.interview_date >= '%{date}' AND
+        (e.id = i.employee_1_id OR e.id = i.employee_2_id OR e.id = i.employee_3_id)
+      )
+      LEFT OUTER JOIN stages s ON s.id = i.stage_id
+
+      WHERE e.inactive = 'f'
+      AND e.role_id = %{role_id}
+
+      GROUP BY e.id
+      ORDER BY points %{sort}
+      LIMIT %{limit}
+    QUERY
 
     columns do
       column do
         h3 "Most Interviewers by Role (#{num_days} days)"
 
-        most_query = query.order('interview_count DESC')
         Role.active.each do |role|
           panel role.name do
             records = Rails.cache.fetch("leaderboard/#{cache_key}/most/#{role.id}", expires_in: 1.hour) do
-              most_query.where(role_id: role.id).to_a
+              query = sql % { date: num_days.days.ago.rfc2822, role_id: role.id, sort: 'DESC', limit: num_limit }
+              ActiveRecord::Base.connection.execute(query).to_a
             end
 
             table_for records do
-              column :name
-              column :grade_name
-              column :interview_count
+              column 'Employee' do |r| r['employee_name'] end
+              column 'Points' do |r| r['points'] end
             end if records.length > 0
           end
         end
@@ -55,17 +54,16 @@ ActiveAdmin.register_page "Leaderboard" do
       column do
         h3 "Least Interviewers by Role (#{num_days} days)"
 
-        least_query = query.order('interview_count ASC')
         Role.active.each do |role|
           panel role.name do
             records = Rails.cache.fetch("leaderboard/#{cache_key}/least/#{role.id}", expires_in: 1.hour) do
-              least_query.where(role_id: role.id).to_a
+              query = sql % { date: num_days.days.ago.rfc2822, role_id: role.id, sort: 'ASC', limit: num_limit }
+              ActiveRecord::Base.connection.execute(query).to_a
             end
 
             table_for records do
-              column :name
-              column :grade_name
-              column :interview_count
+              column 'Employee' do |r| r['employee_name'] end
+              column 'Points' do |r| r['points'] end
             end if records.length > 0
           end
         end

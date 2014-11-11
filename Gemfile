@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'jbuilder', '~> 2.0'
 gem 'devise', '~> 3.3.0'
-gem 'squeel', '~> 1.2.1'
 gem 'pg', '~> 0.17.1'
 
 gem 'activeadmin', github: 'activeadmin'
