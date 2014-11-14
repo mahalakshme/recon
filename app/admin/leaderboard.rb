@@ -14,6 +14,7 @@ ActiveAdmin.register_page "Leaderboard" do
 
     sql = <<-QUERY
       SELECT
+        e.id AS employee_id,
         e.name AS employee_name,
         COALESCE(SUM(s.points), 0) AS points
 
@@ -44,7 +45,7 @@ ActiveAdmin.register_page "Leaderboard" do
             end
 
             table_for records do
-              column 'Employee' do |r| r['employee_name'] end
+              column 'Employee' do |r| link_to r['employee_name'], employee_path(r['employee_id']) end
               column 'Points' do |r| r['points'] end
             end if records.length > 0
           end
@@ -62,7 +63,7 @@ ActiveAdmin.register_page "Leaderboard" do
             end
 
             table_for records do
-              column 'Employee' do |r| r['employee_name'] end
+              column 'Employee' do |r| link_to r['employee_name'], employee_path(r['employee_id']) end
               column 'Points' do |r| r['points'] end
             end if records.length > 0
           end

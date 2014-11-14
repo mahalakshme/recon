@@ -28,4 +28,8 @@ class Employee < ActiveRecord::Base
   validates :role_id, presence: true
 
   scope :active, -> { where(inactive: false) }
+
+  def interviews
+    Interview.where('employee_1_id = ? OR employee_2_id = ? OR employee_3_id = ?', id, id, id)
+  end
 end

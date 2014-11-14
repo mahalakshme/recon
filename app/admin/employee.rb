@@ -47,4 +47,28 @@ ActiveAdmin.register Employee do
     actions
   end
 
+  show do |e|
+    attributes_table do
+      row 'Employee ID' do e.employee_ref end
+      row :name
+      row :role
+      row :grade
+      row :inactive
+      row :created_at
+      row :updated_at
+    end
+
+    panel "Interviews" do
+      table_for e.interviews.order('interview_date DESC') do
+        column :candidate
+        column :interview_date
+        column :stage
+        column :status
+        column :employee_1
+        column :employee_2
+        column :employee_3
+      end
+    end
+  end
+
 end
