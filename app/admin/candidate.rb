@@ -1,7 +1,7 @@
 ActiveAdmin.register Candidate do
 
-  permit_params :id, :name, :skill, :gender, :experience_years, :experience_months, :source_id, :role_id,
-    interviews_attributes: [ :id, :stage_id, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :_destroy ]
+  permit_params :id, :name, :skill, :gender, :experience_years, :experience_months, :source_id, :role_id, :notes,
+    interviews_attributes: [ :id, :stage_id, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :notes, :_destroy ]
 
   filter :name
   filter :skill
