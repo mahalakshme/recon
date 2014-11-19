@@ -93,6 +93,7 @@ ActiveAdmin.register Candidate do
         column :employee_1
         column :employee_2
         column :employee_3
+        column :notes
       end
     end
   end
