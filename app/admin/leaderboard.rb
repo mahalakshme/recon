@@ -29,7 +29,7 @@ ActiveAdmin.register Employee, as: 'Leaderboard' do
       Employee.joins(
         JOIN_SQL % { start_date: leaderboard_date.at_beginning_of_month.iso8601, end_date: leaderboard_date.at_end_of_month.iso8601 }
       ).select(
-        "employees.employee_ref, employees.name, employees.role_id, employees.grade_id, points.points"
+        "employees.id, employees.employee_ref, employees.name, employees.role_id, employees.grade_id, points.points"
       )
     end
 
@@ -40,7 +40,9 @@ ActiveAdmin.register Employee, as: 'Leaderboard' do
 
   index title: Proc.new{ "Leaderboard for #{leaderboard_date.strftime('%b %Y')}" } do
     column :employee_ref
-    column :name
+    column :name do |e|
+      link_to e.name, employee_path(e)
+    end
     column :role
     column :grade
     column :points, sortable: :points
