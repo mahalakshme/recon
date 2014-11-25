@@ -111,7 +111,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  config.root_to = 'leaderboards#index'
+  config.root_to = 'leaderboard/employees#index'
 
 
   # == Admin Comments

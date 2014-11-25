@@ -1,4 +1,4 @@
-ActiveAdmin.register Employee, as: 'Leaderboard' do
+ActiveAdmin.register Employee, namespace: 'leaderboard' do
 
   JOIN_SQL = <<-QUERY
     INNER JOIN (
