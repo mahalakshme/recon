@@ -28,6 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     echo "Setting up postgres authentication..."
     echo 'host all all 0.0.0.0/0 trust' > /etc/postgresql/9.3/main/pg_hba.conf
+    echo "127.0.0.1 postgres" > /etc/hosts
     service postgresql restart
 
     echo "Setting up ruby..."

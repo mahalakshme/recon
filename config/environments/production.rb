@@ -1,5 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.lograge.enabled = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -80,7 +81,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # Secret key base
-  config.secret_key_base = ENV['SECRET_KEY_BASE']
 end

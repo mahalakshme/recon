@@ -11,6 +11,7 @@ gem 'rails', '4.1.5'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-ui-rails', '~> 5.0.0'
+gem 'lograge', '~> 0.3.0'
 
 group :development do
   gem 'spring'
@@ -23,4 +24,5 @@ group :production do
   gem 'dalli', '~> 2.7.2'
   gem 'puma', '~> 2.11'
   gem 'heroku_rails_deflate', '~> 1.0.3'
+  gem 'rails_12factor'
 end

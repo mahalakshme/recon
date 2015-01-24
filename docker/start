@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
 export SECRET_KEY_BASE=$(bundle exec rake secret)
-bundle exec rake assets:precompile db:create db:migrate db:seed
+bundle exec rake db:create
+bundle exec rake assets:precompile db:migrate db:seed
 bundle exec puma -C config/puma.rb
