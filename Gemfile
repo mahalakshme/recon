@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'jbuilder', '~> 2.0'
-gem 'devise', '~> 3.3.0'
+gem 'devise', '~> 3.4.0'
 gem 'pg', '~> 0.18.1'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin', '~> 0.0.8'
 
-gem 'rails', '4.1.5'
-gem 'sass-rails', '~> 4.0.3'
+gem 'rails', '4.2.0'
+gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'lograge', '~> 0.3.0'
