@@ -26,3 +26,4 @@ production:
   <<: *default
   host: postgres
   database: recon_prod
+  pool: <%= ENV['MAX_THREADS'] || 16 %>
