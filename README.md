@@ -2,9 +2,23 @@
 
 Reconnaisance for Recruitment.
 
-## Production
+## Getting Started
+
+The project is vagrant-ized. So all you need to do is:
+
+* Install Vagrant
+* Clone this repository
+* Run `vagrant up` to provision and boot a VM
+* Run `vagrant ssh` to login to the VM
+* Run `cd /vagrant; rails server -b 0.0.0.0` to start the server
+* Hit `localhost:3000` in your browser
+
+## Production Deployment
 
 ### Initial Setup
+
+    # Install Docker
+    curl -sSL https://get.docker.io | sh
 
     # Pull and run postgres (needs to be done only once)
     mkdir /var/lib/recon-postgres
