@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 export SECRET_KEY_BASE=$(bundle exec rake secret)
-bundle exec rake db:create
-bundle exec rake assets:precompile db:migrate db:seed
-bundle exec puma -C config/puma.rb
+export PORT=${PORT:-3000}
+export RAILS_ENV=${RAILS_ENV:-production}
+export MIN_WORKERS=${MIN_WORKERS:-3}
+export MAX_WORKERS=${MAX_WORKERS:-3}
+
+bundle exec rake db:create db:migrate db:seed assets:precompile
+bundle exec passenger start -p $PORT -e $RAILS_ENV --min-instances $MIN_WORKERS --max-pool-size $MAX_WORKERS

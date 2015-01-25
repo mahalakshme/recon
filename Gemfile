@@ -22,7 +22,7 @@ end
 
 group :production do
   gem 'dalli', '~> 2.7.2'
-  gem 'puma', '~> 2.11'
+  gem 'passenger', '~> 5.0.0.beta2'
   gem 'heroku_rails_deflate', '~> 1.0.3'
   gem 'rails_12factor'
 end

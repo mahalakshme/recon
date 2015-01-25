@@ -43,5 +43,7 @@ The project is vagrant-ized. So all you need to do is:
 
 ## Production Testing in Vagrant
 
-    export RAILS_ENV=production PORT=3000
+    # Simply run:
     docker/start
+
+    # Or install docker and follow the above instructions
