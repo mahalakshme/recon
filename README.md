@@ -2,16 +2,20 @@
 
 Reconnaisance for Recruitment.
 
+## What is Recon?
+
+Recon gamifies recruitment contributions. It assigns points for various Interview stages (such as Telephone, Pairing, etc), tracks Employee scores based on the interviews they take, and shows Leaderboards.
+
 ## Getting Started
 
-The project is vagrant-ized. So all you need to do is:
+The project is vagrantized. So all you need to do is:
 
 * Install Vagrant
 * Clone this repository
 * Run `vagrant up` to provision and boot a VM
 * Run `vagrant ssh` to login to the VM
 * Run `cd /vagrant; rails server -b 0.0.0.0` to start the server
-* Hit `localhost:3000` in your browser
+* Browse to `localhost:3000`
 
 ## Production Deployment
 

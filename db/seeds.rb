@@ -53,12 +53,13 @@ if Source.count == 0
 end
 
 if Stage.count == 0
-  Stage.create! name: 'Telephone', position: 0
-  Stage.create! name: 'Code Review', position: 1
-  Stage.create! name: 'Pairing', position: 2
-  Stage.create! name: 'Round 1', position: 3
-  Stage.create! name: 'Round 2', position: 4
-  Stage.create! name: 'Round 3', position: 5
-  Stage.create! name: 'P3', position: 6
-  Stage.create! name: 'Leadership', position: 7
+  Stage.create! name: 'Telephone', position: 0, points: 5
+  Stage.create! name: 'Code Review', position: 1, points: 10
+  Stage.create! name: 'Pairing', position: 2, points: 15
+  Stage.create! name: 'Round 1', position: 3, points: 25
+  Stage.create! name: 'Round 2', position: 4, points: 25
+  Stage.create! name: 'Round 3', position: 5, points: 15
+  Stage.create! name: 'P3', position: 6, points: 10
+  Stage.create! name: 'Leadership', position: 7, points: 5
+  Stage.create! name: 'Campus', position: 8, points: 100
 end
