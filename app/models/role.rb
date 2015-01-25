@@ -3,10 +3,10 @@
 # Table name: roles
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  name       :string
 #  created_at :datetime
 #  updated_at :datetime
-#  inactive   :boolean          default(FALSE), not null
+#  inactive   :boolean          default("false"), not null
 #
 
 class Role < ActiveRecord::Base

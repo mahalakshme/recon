@@ -3,13 +3,13 @@
 # Table name: employees
 #
 #  id           :integer          not null, primary key
-#  name         :string(255)
-#  employee_ref :string(255)
+#  name         :string
+#  employee_ref :string
 #  grade_id     :integer
 #  role_id      :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  inactive     :boolean          default(FALSE), not null
+#  inactive     :boolean          default("false"), not null
 #
 # Indexes
 #

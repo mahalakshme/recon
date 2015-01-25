@@ -3,8 +3,8 @@
 # Table name: candidates
 #
 #  id                  :integer          not null, primary key
-#  name                :string(255)
-#  skill               :string(255)
+#  name                :string
+#  skill               :string
 #  gender              :integer
 #  experience          :decimal(5, 2)
 #  source_id           :integer
@@ -12,17 +12,18 @@
 #  last_interview_date :datetime
 #  created_at          :datetime
 #  updated_at          :datetime
-#  experience_years    :integer          default(0)
-#  experience_months   :integer          default(0)
+#  experience_years    :integer          default("0")
+#  experience_months   :integer          default("0")
 #  notes               :text
 #  last_status         :integer
 #  last_stage_id       :integer
 #
 # Indexes
 #
-#  index_candidates_on_last_stage_id  (last_stage_id)
-#  index_candidates_on_role_id        (role_id)
-#  index_candidates_on_source_id      (source_id)
+#  index_candidates_on_last_interview_date  (last_interview_date)
+#  index_candidates_on_last_stage_id        (last_stage_id)
+#  index_candidates_on_role_id              (role_id)
+#  index_candidates_on_source_id            (source_id)
 #
 
 class Candidate < ActiveRecord::Base
