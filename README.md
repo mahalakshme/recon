@@ -21,9 +21,8 @@ The project is vagrantized. So all you need to do is:
 
 Recon is a rolling release with two branches:
 
-* `master `: Deploy at your own risk
+* `dev `: Under active development, may contain breaking changes
 * `release`: Current release-ready code, use this for deployments
-
 
 ## Deployment
 
@@ -44,10 +43,11 @@ Recon is a rolling release with two branches:
 
 ### Build and Run
 
-    # Build the latest Recon (this is going to take quite a bit of time)
+    # Make sure you're on the latest release branch
+    git checkout release
     git pull
 
-    # Double check: Are you on the release branch?
+    # Build the latest Recon (this could take a while)
     docker build -t recon:latest .
 
     # Remove the old container (if you're redeploying)
