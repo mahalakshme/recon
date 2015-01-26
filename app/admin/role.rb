@@ -4,4 +4,6 @@ ActiveAdmin.register Role do
 
   permit_params :name, :inactive
 
+  config.sort_order = "name_asc"
+
 end
