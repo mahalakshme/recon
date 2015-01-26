@@ -17,7 +17,17 @@ The project is vagrantized. So all you need to do is:
 * Run `cd /vagrant; rails server -b 0.0.0.0` to start the server
 * Browse to `localhost:3000`
 
-## Production Deployment
+## Release Policy
+
+Recon is a rolling release with two branches:
+
+* `master `: Deploy at your own risk
+* `release`: Current release-ready code, use this for deployments
+
+
+## Deployment
+
+**TL;DR - Always use the `release` branch for deployments.**
 
 ### Initial Setup
 
@@ -30,12 +40,14 @@ The project is vagrantized. So all you need to do is:
     docker run --name recon-postgres -v /var/lib/recon-postgres:/var/lib/postgresql/data -d postgres:9
 
     # Clone the repository
-    git clone https://github.com/TWChennai/recon.git
+    git clone https://github.com/TWChennai/recon.git --branch release
 
 ### Build and Run
 
     # Build the latest Recon (this is going to take quite a bit of time)
     git pull
+
+    # Double check: Are you on the release branch?
     docker build -t recon:latest .
 
     # Remove the old container (if you're redeploying)
