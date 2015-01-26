@@ -5,9 +5,11 @@ ActiveAdmin.register Employee, namespace: 'leaderboard' do
       SELECT e.id AS id,
       COALESCE(SUM(s.points), 0) AS points
       FROM employees e
+      LEFT OUTER JOIN employee_interviews ei ON ei.employee_id = e.id
       LEFT OUTER JOIN interviews i ON (
-        i.interview_date >= '%{start_date}' AND i.interview_date <= '%{end_date}' AND
-        e.id = i.employee_1_id OR e.id = i.employee_2_id OR e.id = i.employee_3_id
+        i.id = ei.interview_id AND
+        i.interview_date >= '%{start_date}' AND
+        i.interview_date <= '%{end_date}'
       )
       LEFT OUTER JOIN stages s ON s.id = i.stage_id
       GROUP BY e.id

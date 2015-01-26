@@ -5,6 +5,7 @@ setupSelectizeAutocomplete = (container) ->
     valueField: 'id'
     labelField: 'name'
     searchField: 'name'
+    plugins: ['remove_button']
     load: (query, callback) ->
       return callback unless query.length
       $.ajax

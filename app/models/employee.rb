@@ -27,9 +27,12 @@ class Employee < ActiveRecord::Base
   validates :grade_id, presence: true
   validates :role_id, presence: true
 
+  has_many :employee_interviews
+  has_many :interviews, through: :employee_interviews
+
   scope :active, -> { where(inactive: false) }
 
-  def interviews
-    Interview.where('employee_1_id = ? OR employee_2_id = ? OR employee_3_id = ?', id, id, id)
-  end
+  scope :includes_interviews, proc { includes(interviews: [ :stage, :employees ]) }
+  scope :includes_meta, proc { includes(:grade, :role) }
+
 end

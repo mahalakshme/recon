@@ -29,9 +29,8 @@ class Interview < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :stage
 
-  belongs_to :employee_1, class_name: 'Employee'
-  belongs_to :employee_2, class_name: 'Employee'
-  belongs_to :employee_3, class_name: 'Employee'
+  has_many :employee_interviews
+  has_many :employees, through: :employee_interviews
 
   enum status: {
     "Scheduled" => 5,
@@ -45,12 +44,17 @@ class Interview < ActiveRecord::Base
   validates :stage, presence: true
   validates :status, presence: true
   validates :interview_date, presence: true
-  validates :employee_1, presence: true
 
   after_save :update_last_interview_columns
 
   def update_last_interview_columns
     candidate.update_last_interview_columns
+  end
+
+  def employee_ids_attributes=(new_ids)
+    self.employee_interviews = new_ids.flatten.uniq.map do |e|
+      self.employee_interviews.new employee_id: e
+    end
   end
 
 end

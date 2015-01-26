@@ -1,7 +1,7 @@
 ActiveAdmin.register Candidate do
 
   permit_params :id, :name, :skill, :gender, :experience_years, :experience_months, :source_id, :role_id, :notes,
-    interviews_attributes: [ :id, :stage_id, :interview_date, :candidate_id, :employee_1_id, :employee_2_id, :employee_3_id, :status, :notes, :_destroy ]
+    interviews_attributes: [ :id, :stage_id, :interview_date, :candidate_id, :status, :notes, :_destroy, employee_ids: [] ]
 
   filter :name
   filter :skill
@@ -17,9 +17,15 @@ ActiveAdmin.register Candidate do
   filter :last_stage, as: :select, collection: Stage.all, multiple: true, input_html: { class: 'selectize' }
   filter :last_interview_date
 
+  config.sort_order = "last_interview_date_desc"
+
   controller do
     def scoped_collection
-      Candidate.includes(:role, :last_stage, source: :source_group)
+      Candidate.includes_meta
+    end
+
+    def find_resource
+      Candidate.includes_interviews.includes_meta.find params[:id]
     end
   end
 
@@ -59,9 +65,7 @@ ActiveAdmin.register Candidate do
       fi.input :interview_date, as: :jquery_datetime_picker
       fi.input :stage, as: :select, collection: Stage.all
       fi.input :status, as: :select, collection: Interview.statuses.keys
-      fi.input :employee_1, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
-      fi.input :employee_2, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
-      fi.input :employee_3, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }
+      fi.input :employees, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }, multiple: true
       fi.input :notes, input_html: { rows: 2 }
     end
 
@@ -90,10 +94,12 @@ ActiveAdmin.register Candidate do
         column :interview_date
         column :stage
         column :status
-        column :employee_1
-        column :employee_2
-        column :employee_3
         column :notes
+        column :employees do |i|
+          i.employees.map do |e|
+            link_to e.name, e
+          end.join(', ').html_safe
+        end
       end
     end
   end

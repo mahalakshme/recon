@@ -9,9 +9,15 @@ ActiveAdmin.register Employee do
   filter :role
   filter :inactive
 
+  config.sort_order = "name_asc"
+
   controller do
     def scoped_collection
-      Employee.includes(:role, :grade)
+      Employee.includes_meta
+    end
+
+    def find_resource
+      Employee.includes_interviews.includes_meta.find params[:id]
     end
   end
 
@@ -59,15 +65,16 @@ ActiveAdmin.register Employee do
     end
 
     panel "Interviews" do
-      table_for e.interviews.order('interview_date DESC') do
-        column :candidate
+      table_for e.interviews.order(interview_date: :desc) do
         column :interview_date
         column :stage
         column :status
-        column :employee_1
-        column :employee_2
-        column :employee_3
         column :notes
+        column :employees do |i|
+          i.employees.map do |e|
+            link_to e.name, e
+          end.join(', ').html_safe
+        end
       end
     end
   end

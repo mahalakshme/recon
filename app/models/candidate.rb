@@ -34,6 +34,9 @@ class Candidate < ActiveRecord::Base
   has_many :interviews, dependent: :destroy
   accepts_nested_attributes_for :interviews, allow_destroy: true
 
+  scope :includes_interviews, proc { includes(interviews: [ :stage, :employees ]) }
+  scope :includes_meta, proc { includes(:role, :last_stage, source: :source_group) }
+
   enum gender: {
     "Male"   => 0,
     "Female" => 1,

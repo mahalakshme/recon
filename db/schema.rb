@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111174036) do
+ActiveRecord::Schema.define(version: 20150126090512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 20141111174036) do
   add_index "candidates", ["last_stage_id"], name: "index_candidates_on_last_stage_id", using: :btree
   add_index "candidates", ["role_id"], name: "index_candidates_on_role_id", using: :btree
   add_index "candidates", ["source_id"], name: "index_candidates_on_source_id", using: :btree
+
+  create_table "employee_interviews", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "interview_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "employee_interviews", ["employee_id"], name: "index_employee_interviews_on_employee_id", using: :btree
+  add_index "employee_interviews", ["interview_id"], name: "index_employee_interviews_on_interview_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
@@ -141,4 +151,6 @@ ActiveRecord::Schema.define(version: 20141111174036) do
     t.integer  "points"
   end
 
+  add_foreign_key "employee_interviews", "employees"
+  add_foreign_key "employee_interviews", "interviews"
 end

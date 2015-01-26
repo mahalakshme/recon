@@ -7,12 +7,12 @@ class SelectizeAutocompleteInput < ::Formtastic::Inputs::SelectInput
     end
   end
 
-  def raw_collection
-    val = object.send(method)
-    [ val ]
-  end
-
   private
+
+  def raw_collection
+    res = object.send(method)
+    (res.kind_of?(ActiveRecord::Relation) || res.kind_of?(Array)) ? res : [res]
+  end
 
   def autocomplete_options
     options = self.options.fetch(:selectize, {})
