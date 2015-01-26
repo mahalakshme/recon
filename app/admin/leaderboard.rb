@@ -1,4 +1,4 @@
-ActiveAdmin.register Employee, namespace: 'leaderboard' do
+ActiveAdmin.register Employee, as: 'Leaderboard', namespace: :guest do
 
   JOIN_SQL = <<-QUERY
     INNER JOIN (
@@ -25,8 +25,6 @@ ActiveAdmin.register Employee, namespace: 'leaderboard' do
   config.sort_order = "points_desc"
 
   controller do
-    skip_before_filter :authenticate_active_admin_user
-
     def scoped_collection
       Employee.joins(
         JOIN_SQL % { start_date: leaderboard_date.at_beginning_of_month.iso8601, end_date: leaderboard_date.at_end_of_month.iso8601 }
@@ -43,7 +41,7 @@ ActiveAdmin.register Employee, namespace: 'leaderboard' do
   index title: Proc.new{ "Leaderboard for #{leaderboard_date.strftime('%b %Y')}" } do
     column :employee_ref
     column :name do |e|
-      link_to e.name, employee_path(e)
+      link_to e.name, [:admin, e]
     end
     column :role
     column :grade

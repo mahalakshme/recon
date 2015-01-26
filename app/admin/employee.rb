@@ -41,7 +41,7 @@ ActiveAdmin.register Employee do
   end
 
   action_item only: :index do
-    link_to "Upload Jigsaw CSV", upload_csv_employees_path
+    link_to "Upload Jigsaw CSV", upload_csv_admin_employees_path
   end
 
   index do
@@ -72,7 +72,7 @@ ActiveAdmin.register Employee do
         column :notes
         column :employees do |i|
           i.employees.map do |e|
-            link_to e.name, e
+            link_to e.name, [:admin, e]
           end.join(', ').html_safe
         end
       end

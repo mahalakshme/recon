@@ -34,7 +34,7 @@ ActiveAdmin.setup do |config|
   #   config.default_namespace = false
   #
   # Default:
-  config.default_namespace = false
+  # config.default_namespace = false
 
   #
   # You can customize the settings for each namespace by using
@@ -47,6 +47,24 @@ ActiveAdmin.setup do |config|
   #
   # This will ONLY change the title for the admin section. Other
   # namespaces will continue to use the main "site_title" configuration.
+
+  config.namespace :guest do |guest|
+    guest.root_to = 'leaderboards#index'
+    guest.authentication_method = false
+    guest.batch_actions = false
+    guest.build_menu :default do |menu|
+      menu.add label: "Switch to Admin", url: "/admin"
+    end
+  end
+
+  config.namespace :admin do |admin|
+    admin.root_to = 'candidates#index'
+    admin.build_menu :default do |menu|
+      menu.add label: "Switch to Guest", url: "/"
+    end
+  end
+
+  config.default_namespace = :admin
 
   # == User Authentication
   #
@@ -111,7 +129,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  config.root_to = 'leaderboard/employees#index'
+  # config.root_to = 'employees#index'
 
 
   # == Admin Comments

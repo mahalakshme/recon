@@ -65,7 +65,7 @@ ActiveAdmin.register Candidate do
       fi.input :interview_date, as: :jquery_datetime_picker
       fi.input :stage, as: :select, collection: Stage.all
       fi.input :status, as: :select, collection: Interview.statuses.keys
-      fi.input :employees, as: :selectize_autocomplete, selectize: { url: autocomplete_employees_path }, multiple: true
+      fi.input :employees, as: :selectize_autocomplete, selectize: { url: autocomplete_admin_employees_path }, multiple: true
       fi.input :notes, input_html: { rows: 2 }
     end
 
@@ -97,7 +97,7 @@ ActiveAdmin.register Candidate do
         column :notes
         column :employees do |i|
           i.employees.map do |e|
-            link_to e.name, e
+            link_to e.name, [:admin, e]
           end.join(', ').html_safe
         end
       end
