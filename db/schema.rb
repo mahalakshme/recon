@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126090512) do
+ActiveRecord::Schema.define(version: 20150126114156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,9 +105,6 @@ ActiveRecord::Schema.define(version: 20150126090512) do
   create_table "interviews", force: :cascade do |t|
     t.datetime "interview_date"
     t.integer  "candidate_id"
-    t.integer  "employee_1_id"
-    t.integer  "employee_2_id"
-    t.integer  "employee_3_id"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -116,9 +113,6 @@ ActiveRecord::Schema.define(version: 20150126090512) do
   end
 
   add_index "interviews", ["candidate_id"], name: "index_interviews_on_candidate_id", using: :btree
-  add_index "interviews", ["employee_1_id"], name: "index_interviews_on_employee_1_id", using: :btree
-  add_index "interviews", ["employee_2_id"], name: "index_interviews_on_employee_2_id", using: :btree
-  add_index "interviews", ["employee_3_id"], name: "index_interviews_on_employee_3_id", using: :btree
   add_index "interviews", ["stage_id"], name: "index_interviews_on_stage_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
