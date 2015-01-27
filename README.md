@@ -16,6 +16,11 @@ The project is vagrantized. So all you need to do is:
 * Run `vagrant ssh` to login to the VM
 * Run `cd /vagrant; rails server -b 0.0.0.0` to start the server
 * Browse to `localhost:3000`
+  * Click `Switch to Admin`
+  * Login as `admin@example.com`/`password` (**NOTE**: seeded for development only)
+  * Click `Organization > Employees > Upload Jigsaw CSV`
+  * Upload a CSV file from Jigsaw (`jigsaw.thoughtworks.com > People > Export`)
+  * Start creating Candidates!
 
 ## Release Policy
 
