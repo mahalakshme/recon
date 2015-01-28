@@ -62,7 +62,7 @@ Recon is a rolling release with two branches:
     # Take a database backup (check do-backup.sh in the production machine)
 
     # Run
-    docker run -e PORT=8080 --name recon-prod --link recon-postgres:postgres -p 80:8080 -d recon:latest
+    docker run --name recon-prod --link recon-postgres:postgres -p 80:3000 -d recon:latest
 
 ## Production Testing in Vagrant
 
