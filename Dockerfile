@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 
 ENV RAILS_ENV production
-EXPOSE 8080
+EXPOSE 3000
 CMD ["/app/docker/start"]
 
 COPY docker/provision /root/provision
