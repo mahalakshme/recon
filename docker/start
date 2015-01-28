@@ -7,4 +7,9 @@ export MIN_WORKERS=${MIN_WORKERS:-2}
 export MAX_WORKERS=${MAX_WORKERS:-2}
 
 bundle exec rake db:create db:migrate db:seed assets:precompile
-bundle exec puma -C config/puma.rb
+
+# Puma
+# bundle exec puma -C config/puma.rb
+
+# Passenger
+bundle exec passenger start -p $PORT -e $RAILS_ENV --min-instances $MIN_WORKERS --max-pool-size $MAX_WORKERS

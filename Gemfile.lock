@@ -93,10 +93,6 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    heroku_rails_deflate (1.0.3)
-      actionpack (>= 3.2.13)
-      activesupport (>= 3.2.13)
-      rack (>= 1.4.5)
     hike (1.2.3)
     i18n (0.7.0)
     inherited_resources (1.6.0)
@@ -229,7 +225,6 @@ DEPENDENCIES
   annotate
   dalli (~> 2.7.2)
   devise (~> 3.4.0)
-  heroku_rails_deflate (~> 1.0.3)
   jbuilder (~> 2.0)
   jquery-ui-rails (~> 5.0.0)
   lograge (~> 0.3.0)
