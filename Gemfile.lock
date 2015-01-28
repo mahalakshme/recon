@@ -146,6 +146,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    puma (2.11.0)
+      rack (>= 1.1, < 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.0)
@@ -234,6 +236,7 @@ DEPENDENCIES
   passenger (~> 5.0.0.beta2)
   pg (~> 0.18.1)
   pry-rails
+  puma (~> 2.11)
   quiet_assets
   rails (= 4.2.0)
   rails_12factor
