@@ -15,9 +15,12 @@ echo 'deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main' > /etc/
 echo 'deb-src http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main' >> /etc/apt/sources.list.d/passenger.list
 
 apt-get -y --force-yes update
-apt-get -y --force-yes --no-install-recommends install build-essential git libxml2-dev libxslt1-dev ruby2.2 ruby2.2-dev nodejs libpq-dev memcached wget curl
+apt-get -y --force-yes --no-install-recommends install build-essential git libxml2-dev libxslt1-dev ruby2.2 ruby2.2-dev nodejs libpq-dev memcached wget curl libjemalloc-dev
 echo 'gem: --no-ri --no-rdoc' > /etc/gemrc
 gem install bundler
+
+# Make jemalloc as default
+echo '/usr/lib/x86_64-linux-gnu/libjemalloc.so' >> /etc/ld.so.preload
 
 # Cleanup
 apt-get clean

@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     apt-get -y install \
       build-essential git libxml2-dev libxslt1-dev imagemagick \
       zlib1g-dev ruby2.2 ruby2.2-dev ruby-switch nodejs curl wget memcached \
-      postgresql postgresql-contrib postgresql-client libpq-dev
+      postgresql postgresql-contrib postgresql-client libpq-dev libjemalloc-dev
 
     echo "Setting up postgres authentication..."
     echo 'host all all 0.0.0.0/0 trust' > /etc/postgresql/9.3/main/pg_hba.conf
@@ -34,6 +34,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "Setting up ruby..."
     echo 'gem: --no-ri --no-rdoc' > /etc/gemrc
     gem install bundler
+
+    echo "Making jemalloc as default..."
+    echo '/usr/lib/x86_64-linux-gnu/libjemalloc.so' >> /etc/ld.so.preload
   SCRIPT
 
   # Provision as vagrant user
