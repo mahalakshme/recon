@@ -11,10 +11,8 @@ setupDateTimePicker = (container) ->
     $(@).datetimepicker $.extend(options, defaults)
 
 $ ->
-  $(document).on('focus', '.datepicker:not(.hasDatepicker)', ->
-    options = $(@).data 'datepicker-options'
-    $(@).datetimepicker $.extend(options, defaults)
-  )
+  $(document).on 'focus', '.datepicker:not(.hasDatepicker)', ->
+    setupDateTimePicker @
 
   $(document).on 'has_many_add:after', '.has_many_container', (e, fieldset) ->
     setupDateTimePicker fieldset
