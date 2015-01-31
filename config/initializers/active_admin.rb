@@ -59,6 +59,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.root_to = 'candidates#index'
+    admin.batch_actions = false
     admin.build_menu :default do |menu|
       menu.add label: "Switch to Guest", url: "/"
     end
