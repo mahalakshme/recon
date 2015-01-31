@@ -11,7 +11,5 @@
 #
 
 class Stage < ActiveRecord::Base
-  default_scope { order(:position) }
-
   validates_uniqueness_of :name
 end

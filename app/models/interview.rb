@@ -18,8 +18,6 @@
 #
 
 class Interview < ActiveRecord::Base
-  default_scope { order(:interview_date) }
-
   belongs_to :candidate
   belongs_to :stage
 

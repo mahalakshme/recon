@@ -31,7 +31,7 @@ class Candidate < ActiveRecord::Base
   belongs_to :role
   belongs_to :last_stage, class_name: 'Stage'
 
-  has_many :interviews, dependent: :destroy
+  has_many :interviews, -> { order(:interview_date) }, dependent: :destroy
   accepts_nested_attributes_for :interviews, allow_destroy: true
 
   scope :includes_interviews, proc { includes(interviews: [ :stage, :employees ]) }
