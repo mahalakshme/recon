@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export SECRET_KEY_BASE=${SECRET_KEY_BASE:"A long secret"}
+export SECRET_KEY_BASE=${SECRET_KEY_BASE:-"A long secret"}
 export PORT=${PORT:-3000}
 export RAILS_ENV=${RAILS_ENV:-production}
 export MIN_WORKERS=${MIN_WORKERS:-2}
