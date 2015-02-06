@@ -6,26 +6,27 @@ ActiveAdmin.register Candidate do
   filter :name
   filter :skill
   filter :experience
-  filter :gender, as: :select, collection: Candidate.genders, multiple: true, input_html: { class: 'selectize' }
+  filter :gender, as: :select, multiple: true, input_html: { class: 'selectize' }, collection: proc { Candidate.genders }
+  filter :role, as: :select, multiple: true, input_html: { class: 'selectize' }, collection: proc { Role.all }
   filter :source, as: :select, collection: proc {
     option_groups_from_collection_for_select(
       SourceGroup.includes(:sources), :sources, :name, :id, :name
     )
   }, multiple: true, input_html: { class: 'selectize' }
-  filter :role, as: :select, multiple: true, input_html: { class: 'selectize' }
-  filter :last_status, as: :select, collection: Candidate.last_statuses, multiple: true, input_html: { class: 'selectize' }
-  filter :last_stage, as: :select, collection: Stage.all, multiple: true, input_html: { class: 'selectize' }
-  filter :last_interview_date
+
+  filter :interviews_stage_id, as: :select, multiple: true, input_html: { class: 'selectize' }, label: 'Any Interview Stage', collection: proc { Stage.all }
+  filter :interviews_status, as: :select, multiple: true, input_html: { class: 'selectize' }, label: 'Any Interview Status', collection: proc { Interview.statuses }
+  filter :interviews_interview_date, as: :date_range, label: 'Any Interview Date'
+
+  filter :last_stage, as: :select, multiple: true, input_html: { class: 'selectize' }, collection: proc { Stage.all }, label: 'Latest Interview Stage'
+  filter :last_status, as: :select, multiple: true, input_html: { class: 'selectize' }, collection: proc { Candidate.last_statuses }, label: 'Latest Interview Status'
+  filter :last_interview_date, as: :date_range, label: 'Latest Interview Date'
 
   config.sort_order = "last_interview_date_desc"
 
   controller do
     def scoped_collection
-      Candidate.includes_meta
-    end
-
-    def find_resource
-      Candidate.includes_interviews.includes_meta.find params[:id]
+      Candidate.includes_meta.includes_interviews.group('candidates.id')
     end
   end
 
