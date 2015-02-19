@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Forward rails
   config.vm.network 'forwarded_port', :guest => 3000, :host => 3000
+  config.vm.network 'forwarded_port', :guest => 80, :host => 8080
 
   if Vagrant.has_plugin?('vagrant-cachier')
     config.cache.scope = :box
