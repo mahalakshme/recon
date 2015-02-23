@@ -21,7 +21,7 @@ class Interview < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :stage
 
-  has_many :employee_interviews
+  has_many :employee_interviews, dependent: :destroy
   has_many :employees, through: :employee_interviews
 
   enum status: {
