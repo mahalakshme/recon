@@ -23,6 +23,7 @@ class Interview < ActiveRecord::Base
 
   has_many :employee_interviews, dependent: :destroy
   has_many :employees, through: :employee_interviews
+  has_one :role, through: :candidate
 
   enum status: {
     "Scheduled" => 5,
