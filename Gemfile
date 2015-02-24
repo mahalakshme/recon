@@ -18,6 +18,7 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'pry-rails'
+  gem 'rails_instrument'
 end
 
 group :production do
