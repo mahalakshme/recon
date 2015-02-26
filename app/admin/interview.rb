@@ -1,3 +1,30 @@
+def column_definition
+  column :name, sortable: :name do |interview|
+    interview.candidate.name
+  end
+  column :experience, sortable: :experience do |interview|
+    "#{interview.candidate.experience_years},#{interview.candidate.experience_months}"
+  end
+  column :source, sortable: :source do |interview|
+    interview.candidate.source.name
+  end
+  column :role, sortable: :role do |interview|
+    interview.candidate.role.name
+  end
+  column :stage, sortable: :stage do |interview|
+    interview.stage.name
+  end
+  column :date, sortable: :date do |interview|
+    interview.interview_date.strftime '%a,  %b %-d %Y'
+  end
+  column :panel, sortable: :panel do |interview|
+    interview.employees.collect(&:name).join(",")
+  end
+  column :status, sortable: :status do |interview|
+    interview.status
+  end
+end
+
 ActiveAdmin.register Interview do
   filter :candidate, as: :select, input_html: { class: 'selectize' }, collection: proc { Candidate.all }
   filter :stage
@@ -12,29 +39,12 @@ ActiveAdmin.register Interview do
   end
 
   index do
-    column :name, sortable: :name do |interview|
-      interview.candidate.name
-    end
-    column :experience, sortable: :experience do |interview|
-      "#{interview.candidate.experience_years},#{interview.candidate.experience_months}"
-    end
-    column :source, sortable: :source do |interview|
-      interview.candidate.source.name
-    end
-    column :role, sortable: :role do |interview|
-      interview.candidate.role.name
-    end
-    column :stage, sortable: :stage do |interview|
-      interview.stage.name
-    end
-    column :date, sortable: :date do |interview|
-      interview.interview_date.strftime '%a %b %-d, %I:%M %p'
-    end
-    column :panel, sortable: :panel do |interview|
-      interview.employees.collect(&:name).join(",")
-    end
-    column :status, sortable: :status do |interview|
-      interview.status
-    end
+    column_definition
   end
+
+  csv do
+    column_definition
+  end
+
+
 end
