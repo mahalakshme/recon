@@ -4,15 +4,9 @@ ActiveAdmin.register Candidate do
     interviews_attributes: [ :id, :stage_id, :interview_date, :candidate_id, :status, :notes, :_destroy, employee_ids: [] ]
 
   filter :name
-  filter :skill
   filter :experience
   filter :gender, as: :select, multiple: true, input_html: { class: 'selectize' }, collection: proc { Candidate.genders }
   filter :role, as: :select, multiple: true, input_html: { class: 'selectize' }, collection: proc { Role.all }
-  filter :source, as: :select, collection: proc {
-    option_groups_from_collection_for_select(
-      SourceGroup.includes(:sources), :sources, :name, :id, :name
-    )
-  }, multiple: true, input_html: { class: 'selectize' }
 
   filter :interviews_stage_id, as: :select, multiple: true, input_html: { class: 'selectize' }, label: 'Any Interview Stage', collection: proc { Stage.all }
   filter :interviews_status, as: :select, multiple: true, input_html: { class: 'selectize' }, label: 'Any Interview Status', collection: proc { Interview.statuses }
@@ -40,8 +34,6 @@ ActiveAdmin.register Candidate do
     column :last_interview_date do |c|
       c.last_interview_date.strftime '%a %b %-d, %I:%M %p'
     end
-    column :skill
-    column :source
     column :role
     actions
   end
